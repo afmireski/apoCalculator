@@ -35,9 +35,29 @@ public:
 
     ~Display();
 
-    void showMessage(char* message);
+    void showMessage(char *message);
 
     void showOperations();
 
     void showResult(float value);
+};
+
+class Calculator
+{
+    Display display;
+
+    Cpu cpu;
+
+    Keyboard keyboard;
+
+public:
+    Calculator();
+
+    ~Calculator();
+
+    Display getDisplay();
+
+    Cpu getCpu();
+
+    Keyboard getKeyboard();
 };
