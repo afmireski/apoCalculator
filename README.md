@@ -16,9 +16,6 @@ Nesse contexto, as características dessa classe são:
 ##### lerNumero - readNumber:
 Esse método receberá a entrada do usuário de um número real. Caso não seja uma entrada válida, retornar exceção. Se a entrada for válida retornar o valor lido.
 
-##### lerNumero - readNumber:
-Esse método receberá a entrada do usuário de um número real. Caso não seja uma entrada válida, retornar exceção. Se a entrada for válida retornar o valor lido e armazená-lo na memória da CPU.
-
 ##### lerOperacao - readOperation
 Esse método receberá como entrada um número inteiro que representará uma das operações possíveis da calculadora:
 - **AC = 0**
@@ -57,6 +54,7 @@ Pega o valor de `operation` e verifica qual operação vai realizar:
   - memory[0] / memory[1]
 - Radiciação:
   - SQRT de memory[0]
+Retorna o resultado.
  
 ##### ac
 Seta a `operation = 1` e zera `memory`.
