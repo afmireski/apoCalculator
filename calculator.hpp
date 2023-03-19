@@ -10,10 +10,20 @@ public:
     unsigned char readOperation();
 };
 
+enum Operation {
+    AC = 0,
+    SUM = 1,
+    SUB = 2,
+    MLT = 3,
+    DIV = 4,
+    RAD = 5,
+    EQU = 6
+};
+
 class Cpu
 {
     float *memory;
-    unsigned char operation;
+    Operation operation;
     unsigned char writeIndex;
 
 public:
