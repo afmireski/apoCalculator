@@ -81,3 +81,23 @@ Esse método mostra um menu contendo todas as opções que podem ser realizada
 
 ##### showResult
 Recebe um número e o exibe para o usuário, seguindo precisão de 3 casas decimais.
+
+
+### Calculadora - Tela
+É o objeto que agrupa todos os anteriores, criando algo funcional.
+
+#### Atributos
+- **display**: uma instância de Display que representa a tela da calculadora;
+- **cpu**: uma instância de CPU que será responsável por realizar as operações da calculadora;
+- **keyboard**: uma instância de Keyboard que representa o teclado da calculadora;
+
+#### Métodos
+
+##### getDisplay
+Fornece acesso ao display da calculadora;
+
+##### getCpu
+Fornece acesso à CPU da calculadora;
+
+##### getKeyboard
+Fornece acesso ao keyboard da calculadora;
