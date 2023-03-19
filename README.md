@@ -16,9 +16,6 @@ Nesse contexto, as características dessa classe são:
 ##### lerNumero - readNumber:
 Esse método receberá a entrada do usuário de um número real. Caso não seja uma entrada válida, retornar exceção. Se a entrada for válida retornar o valor lido.
 
-##### lerNumero - readNumber:
-Esse método receberá a entrada do usuário de um número real. Caso não seja uma entrada válida, retornar exceção. Se a entrada for válida retornar o valor lido e armazená-lo na memória da CPU.
-
 ##### lerOperacao - readOperation
 Esse método receberá como entrada um número inteiro que representará uma das operações possíveis da calculadora:
 - **AC = 0**
@@ -57,6 +54,7 @@ Pega o valor de `operation` e verifica qual operação vai realizar:
   - memory[0] / memory[1]
 - Radiciação:
   - SQRT de memory[0]
+Retorna o resultado.
  
 ##### ac
 Seta a `operation = 1` e zera `memory`.
@@ -83,3 +81,23 @@ Esse método mostra um menu contendo todas as opções que podem ser realizada
 
 ##### showResult
 Recebe um número e o exibe para o usuário, seguindo precisão de 3 casas decimais.
+
+
+### Calculadora - Tela
+É o objeto que agrupa todos os anteriores, criando algo funcional.
+
+#### Atributos
+- **display**: uma instância de Display que representa a tela da calculadora;
+- **cpu**: uma instância de CPU que será responsável por realizar as operações da calculadora;
+- **keyboard**: uma instância de Keyboard que representa o teclado da calculadora;
+
+#### Métodos
+
+##### getDisplay
+Fornece acesso ao display da calculadora;
+
+##### getCpu
+Fornece acesso à CPU da calculadora;
+
+##### getKeyboard
+Fornece acesso ao keyboard da calculadora;
