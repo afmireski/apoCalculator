@@ -1,3 +1,15 @@
+
+enum Operation
+{
+    AC = 0,
+    SUM = 1,
+    SUB = 2,
+    MLT = 3,
+    DIV = 4,
+    RAD = 5,
+    EQU = 6
+};
+
 class Keyboard
 {
 public:
@@ -7,17 +19,7 @@ public:
 
     float readNumber();
 
-    unsigned char readOperation();
-};
-
-enum Operation {
-    AC = 0,
-    SUM = 1,
-    SUB = 2,
-    MLT = 3,
-    DIV = 4,
-    RAD = 5,
-    EQU = 6
+    Operation readOperation();
 };
 
 class Cpu
@@ -65,9 +67,9 @@ public:
 
     ~Calculator();
 
-    Display& getDisplay();
+    Display &getDisplay();
 
-    Cpu& getCpu();
+    Cpu &getCpu();
 
-    Keyboard& getKeyboard();
+    Keyboard &getKeyboard();
 };
