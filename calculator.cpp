@@ -31,13 +31,9 @@ Operation Keyboard::readOperation() {
  * Cpu
 */
 Cpu::Cpu() {
-    int memoryLen = 2;
-    this->memory = new float[memoryLen];
-    for (int i = 0; i < memoryLen; i++) this->memory[i] = 0;
-
-    this->operation = Operation::SUM;
-
-    this->writeIndex = 0;
+    this->memory = new float[2];
+    
+    this->ac();
 }
 
 Cpu::~Cpu() {
@@ -77,6 +73,14 @@ float Cpu::calculate() {
     this->memory[1] = 0;
 
     return response;
+}
+
+void Cpu::ac() {
+    for (int i = 0; i < 2; i++) this->memory[i] = 0;    
+
+    this->operation = Operation::SUM;
+
+    this->writeIndex = 0;
 }
 
 /**
