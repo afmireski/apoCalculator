@@ -83,6 +83,16 @@ void Cpu::ac() {
     this->writeIndex = 0;
 }
 
+void Cpu::write(float value) {
+    this->memory[writeIndex] = value;
+
+    if (writeIndex == 1) {
+        writeIndex = 0;
+    } else {
+        writeIndex = 1;
+    }
+}
+
 /**
  * Display
 */

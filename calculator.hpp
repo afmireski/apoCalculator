@@ -37,7 +37,7 @@ public:
 
     void ac();
 
-    void write();
+    void write(float value);
 };
 
 class Display
