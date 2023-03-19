@@ -55,9 +55,9 @@ public:
 
     ~Calculator();
 
-    Display getDisplay();
+    Display& getDisplay();
 
-    Cpu getCpu();
+    Cpu& getCpu();
 
-    Keyboard getKeyboard();
+    Keyboard& getKeyboard();
 };
