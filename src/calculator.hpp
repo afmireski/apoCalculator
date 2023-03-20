@@ -38,6 +38,8 @@ public:
     void ac();
 
     void write(float value);
+
+    void setOperation(Operation value);
 };
 
 class Display

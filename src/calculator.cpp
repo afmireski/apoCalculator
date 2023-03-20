@@ -5,47 +5,55 @@ using namespace std;
 
 /**
  * Keyboard
-*/
+ */
 Keyboard::Keyboard() {}
 
 Keyboard::~Keyboard() {}
 
-float Keyboard::readNumber() {
+float Keyboard::readNumber()
+{
     float input;
     cin >> input;
 
     return input;
 }
 
-Operation Keyboard::readOperation() {
+Operation Keyboard::readOperation()
+{
     unsigned char input;
 
     cin >> input;
 
-    if (input > 6) return Operation::AC;
+    if (input > 6)
+        return Operation::AC;
 
-    return (Operation) input;
+    return (Operation)input;
 }
-
 
 /**
  * Cpu
-*/
-Cpu::Cpu() {
+ */
+Cpu::Cpu()
+{
     this->memory = new float[2];
-    
+
     this->ac();
 }
 
-Cpu::~Cpu() {
-    delete this->memory;    
+Cpu::~Cpu()
+{
+    delete this->memory;
 }
 
-float Cpu::calculate() {
+float Cpu::calculate()
+{
     float response;
 
     switch (this->operation)
     {
+    case AC:
+        this->ac();
+        return 0;
     case SUM:
         response = this->memory[0] + this->memory[1];
         break;
@@ -53,7 +61,7 @@ float Cpu::calculate() {
     case SUB:
         response = this->memory[0] - this->memory[1];
         break;
-    
+
     case MLT:
         response = this->memory[0] * this->memory[1];
         break;
@@ -77,36 +85,49 @@ float Cpu::calculate() {
     return response;
 }
 
-void Cpu::ac() {
-    for (int i = 0; i < 2; i++) this->memory[i] = 0;    
+void Cpu::ac()
+{
+    for (int i = 0; i < 2; i++)
+        this->memory[i] = 0;
 
     this->operation = Operation::SUM;
 
     this->writeIndex = 0;
 }
 
-void Cpu::write(float value) {
+void Cpu::write(float value)
+{
     this->memory[writeIndex] = value;
 
-    if (writeIndex == 1) {
+    if (writeIndex == 1)
+    {
         writeIndex = 0;
-    } else {
+    }
+    else
+    {
         writeIndex = 1;
     }
 }
 
+
+void Cpu::setOperation(Operation value) {
+    this->operation = value;
+}
+
 /**
  * Display
-*/
+ */
 Display::Display() {}
 
 Display::~Display() {}
 
-void Display::showMessage(char* message) {
+void Display::showMessage(char *message)
+{
     cout << message;
 }
 
-void Display::showOperations() {
+void Display::showOperations()
+{
     cout << "Informe a operação:";
     cout << "0 - AC";
     cout << "1 - Adição";
@@ -117,14 +138,16 @@ void Display::showOperations() {
     cout << "6 - Igual";
 }
 
-void Display::showResult(float value) {
+void Display::showResult(float value)
+{
     cout << fixed << setprecision(2) << value;
 }
 
 /**
  * Calculator
-*/
-Calculator::Calculator() {
+ */
+Calculator::Calculator()
+{
     this->display = new Display();
 
     this->keyboard = new Keyboard();
@@ -132,22 +155,26 @@ Calculator::Calculator() {
     this->cpu = new Cpu();
 }
 
-Calculator::~Calculator() {
-    delete this->display ;
+Calculator::~Calculator()
+{
+    delete this->display;
 
     delete this->keyboard;
 
     delete this->cpu;
 }
 
-Display* Calculator::getDisplay() {
+Display *Calculator::getDisplay()
+{
     return this->display;
 }
 
-Keyboard* Calculator::getKeyboard() {
+Keyboard *Calculator::getKeyboard()
+{
     return this->keyboard;
 }
 
-Cpu* Calculator::getCpu() {
+Cpu *Calculator::getCpu()
+{
     return this->cpu;
 }
