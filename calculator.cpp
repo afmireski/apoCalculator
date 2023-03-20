@@ -124,3 +124,30 @@ void Display::showResult(float value) {
 /**
  * Calculator
 */
+Calculator::Calculator() {
+    this->display = new Display();
+
+    this->keyboard = new Keyboard();
+
+    this->cpu = new Cpu();
+}
+
+Calculator::~Calculator() {
+    delete this->display ;
+
+    delete this->keyboard;
+
+    delete this->cpu;
+}
+
+Display* Calculator::getDisplay() {
+    return this->display;
+}
+
+Keyboard* Calculator::getKeyboard() {
+    return this->keyboard;
+}
+
+Cpu* Calculator::getCpu() {
+    return this->cpu;
+}

@@ -56,20 +56,20 @@ public:
 
 class Calculator
 {
-    Display display;
+    Display* display;
 
-    Cpu cpu;
+    Cpu* cpu;
 
-    Keyboard keyboard;
+    Keyboard* keyboard;
 
 public:
     Calculator();
 
     ~Calculator();
 
-    Display &getDisplay();
+    Display *getDisplay();
 
-    Cpu &getCpu();
+    Cpu *getCpu();
 
-    Keyboard &getKeyboard();
+    Keyboard *getKeyboard();
 };
