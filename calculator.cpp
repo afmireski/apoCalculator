@@ -1,5 +1,6 @@
 #include "calculator.hpp"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 /**
@@ -71,6 +72,7 @@ float Cpu::calculate() {
     }
     this->memory[0] = response;
     this->memory[1] = 0;
+    this->writeIndex = 1;
 
     return response;
 }
@@ -96,7 +98,28 @@ void Cpu::write(float value) {
 /**
  * Display
 */
+Display::Display() {}
 
+Display::~Display() {}
+
+void Display::showMessage(char* message) {
+    cout << message;
+}
+
+void Display::showOperations() {
+    cout << "Informe a operação:";
+    cout << "0 - AC";
+    cout << "1 - Adição";
+    cout << "2 - Subtração";
+    cout << "3 - Multiplicação";
+    cout << "4 - Divisão";
+    cout << "5 - Radiciação";
+    cout << "6 - Igual";
+}
+
+void Display::showResult(float value) {
+    cout << fixed << setprecision(2) << value;
+}
 
 /**
  * Calculator
