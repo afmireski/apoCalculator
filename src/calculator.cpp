@@ -128,7 +128,7 @@ void Display::showMessage(const char *message)
 
 void Display::showOperations()
 {
-    cout << "Informe a operação:\n";
+    cout << "\nInforme a operação:\n";
     cout << "0 - AC\n";
     cout << "1 - Adição\n";
     cout << "2 - Subtração\n";
@@ -136,6 +136,7 @@ void Display::showOperations()
     cout << "4 - Divisão\n";
     cout << "5 - Radiciação\n";
     cout << "6 - Igual\n";
+    cout << "> ";
 }
 
 void Display::showResult(float value)
