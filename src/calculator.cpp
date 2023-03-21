@@ -20,7 +20,7 @@ float Keyboard::readNumber()
 
 Operation Keyboard::readOperation()
 {
-    unsigned char input;
+    unsigned short input;
 
     cin >> input;
 
@@ -140,7 +140,7 @@ void Display::showOperations()
 
 void Display::showResult(float value)
 {
-    cout << fixed << setprecision(2) << value;
+    cout << fixed << setprecision(2) << value << "\n";
 }
 
 /**

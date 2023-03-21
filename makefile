@@ -3,7 +3,7 @@ calculator:
 
 	g++ ./src/main.cpp ./src/calculator.o -o ./bin/main
 
-	# ./bin/main
+	./bin/main
 
 clean:
 	rm ./src/*.o
