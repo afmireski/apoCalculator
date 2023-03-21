@@ -49,7 +49,7 @@ public:
 
     ~Display();
 
-    void showMessage(char *message);
+    void showMessage(const char *message);
 
     void showOperations();
 

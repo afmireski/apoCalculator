@@ -121,21 +121,21 @@ Display::Display() {}
 
 Display::~Display() {}
 
-void Display::showMessage(char *message)
+void Display::showMessage(const char *message)
 {
     cout << message;
 }
 
 void Display::showOperations()
 {
-    cout << "Informe a operação:";
-    cout << "0 - AC";
-    cout << "1 - Adição";
-    cout << "2 - Subtração";
-    cout << "3 - Multiplicação";
-    cout << "4 - Divisão";
-    cout << "5 - Radiciação";
-    cout << "6 - Igual";
+    cout << "Informe a operação:\n";
+    cout << "0 - AC\n";
+    cout << "1 - Adição\n";
+    cout << "2 - Subtração\n";
+    cout << "3 - Multiplicação\n";
+    cout << "4 - Divisão\n";
+    cout << "5 - Radiciação\n";
+    cout << "6 - Igual\n";
 }
 
 void Display::showResult(float value)
