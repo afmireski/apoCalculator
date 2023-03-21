@@ -26,7 +26,7 @@ class Cpu
 {
     float *memory;
     Operation operation;
-    unsigned char writeIndex;
+    unsigned short writeIndex;
 
 public:
     Cpu();

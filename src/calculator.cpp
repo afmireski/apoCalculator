@@ -100,13 +100,13 @@ void Cpu::write(float value)
 {
     this->memory[writeIndex] = value;
 
-    if (writeIndex == 1)
+    if (this->writeIndex == 1)
     {
-        writeIndex = 0;
+        this->writeIndex = 0;
     }
     else
     {
-        writeIndex = 1;
+        this->writeIndex = 1;
     }
 }
 
