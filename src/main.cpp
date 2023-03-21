@@ -18,15 +18,15 @@ int main(int argc, char const *argv[])
 
         Operation operation = calculator.getKeyboard()->readOperation();
 
+        result = calculator.getCpu()->calculate();
+
         if (operation == Operation::EQU)
         {
             calculator.getDisplay()->showMessage("O resultado de suas operações é: ");
             calculator.getDisplay()->showResult(result);
             break;
         };
-
-        result = calculator.getCpu()->calculate();
-
+        
         calculator.getCpu()->setOperation(operation);
     }
 
