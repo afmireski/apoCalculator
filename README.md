@@ -64,6 +64,8 @@ Recebe um número inteiro e o escreve em `memory` com base no `write` index.
 Se `wi` for `0`, escreve e o muda para 1.
 Se `wi` for `1`, escreve e o muda para 0.
 
+##### setOperation
+Recebe um `valor de Operation` e seta `operation` para o valor recebido
 
 ### Tela - Display
 É onde são mostrados os resultados das operações.
