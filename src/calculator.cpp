@@ -1,6 +1,7 @@
 #include "calculator.hpp"
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 using namespace std;
 
 /**
@@ -67,11 +68,11 @@ float Cpu::calculate()
         break;
 
     case DIV:
-        response = this->memory[0] - this->memory[1];
+        response = this->memory[0] / this->memory[1];
         break;
 
     case RAD:
-        response = this->memory[0] - this->memory[1];
+        response = sqrtf(this->memory[0]);
         break;
 
     default: // EQU

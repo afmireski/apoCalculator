@@ -5,11 +5,12 @@ int main(int argc, char const *argv[])
     Calculator calculator;
 
     float result = 0;
+    float n;
+
     while (true)
     {
         calculator.getDisplay()->showMessage("Digite um número:\n");
-
-        float n = calculator.getKeyboard()->readNumber();
+        n = calculator.getKeyboard()->readNumber();
 
         calculator.getCpu()->write(n);
 
@@ -17,16 +18,16 @@ int main(int argc, char const *argv[])
 
         Operation operation = calculator.getKeyboard()->readOperation();
 
-        calculator.getCpu()->setOperation(operation);
-
-        result = calculator.getCpu()->calculate();
-
         if (operation == Operation::EQU)
         {
             calculator.getDisplay()->showMessage("O resultado de suas operações é: ");
             calculator.getDisplay()->showResult(result);
             break;
         };
+
+        result = calculator.getCpu()->calculate();
+
+        calculator.getCpu()->setOperation(operation);
     }
 
     return 0;
