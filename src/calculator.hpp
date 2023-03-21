@@ -1,3 +1,15 @@
+
+enum Operation
+{
+    AC = 0,
+    SUM = 1,
+    SUB = 2,
+    MLT = 3,
+    DIV = 4,
+    RAD = 5,
+    EQU = 6
+};
+
 class Keyboard
 {
 public:
@@ -7,17 +19,7 @@ public:
 
     float readNumber();
 
-    unsigned char readOperation();
-};
-
-enum Operation {
-    AC = 0,
-    SUM = 1,
-    SUB = 2,
-    MLT = 3,
-    DIV = 4,
-    RAD = 5,
-    EQU = 6
+    Operation readOperation();
 };
 
 class Cpu
@@ -35,7 +37,9 @@ public:
 
     void ac();
 
-    void write();
+    void write(float value);
+
+    void setOperation(Operation value);
 };
 
 class Display
@@ -45,7 +49,7 @@ public:
 
     ~Display();
 
-    void showMessage(char *message);
+    void showMessage(const char *message);
 
     void showOperations();
 
@@ -54,20 +58,20 @@ public:
 
 class Calculator
 {
-    Display display;
+    Display* display;
 
-    Cpu cpu;
+    Cpu* cpu;
 
-    Keyboard keyboard;
+    Keyboard* keyboard;
 
 public:
     Calculator();
 
     ~Calculator();
 
-    Display& getDisplay();
+    Display *getDisplay();
 
-    Cpu& getCpu();
+    Cpu *getCpu();
 
-    Keyboard& getKeyboard();
+    Keyboard *getKeyboard();
 };
