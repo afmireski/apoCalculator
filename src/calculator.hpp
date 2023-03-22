@@ -1,4 +1,8 @@
-
+/**
+ * Aluno: André Felipe Mireski
+ * Disciplina: APO
+ * Arquivo: calculator.hpp
+*/
 enum Operation
 {
     AC = 0,

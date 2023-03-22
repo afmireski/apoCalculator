@@ -1,3 +1,9 @@
+/**
+ * Aluno: André Felipe Mireski
+ * Disciplina: APO
+ * Arquivo: calculator.cpp
+*/
+
 #include "calculator.hpp"
 #include <iostream>
 #include <iomanip>
