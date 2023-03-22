@@ -9,7 +9,7 @@ git clone https://github.com/afmireski/apoCalculator.git
 # Entre na pasta do projeto
 cd apoCalculator
 
-# Execute o makefile para compilar o projetp
+# Execute o makefile para compilar o projeto
 make calculator
 
 # A partir desse momento o programa estará rodando.
