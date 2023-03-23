@@ -1,6 +1,23 @@
 # apoCalculator
 Esse é um projeto para a disciplina de Análise e Projetos Orientados a Objetos do curso de Ciências da Computação da UTFPR de Campo Mourão.
 
+## Tutorial
+```zsh
+# Clone o projeto
+git clone https://github.com/afmireski/apoCalculator.git
+
+# Entre na pasta do projeto
+cd apoCalculator
+
+# Execute o makefile para compilar o projeto
+make calculator
+
+# A partir desse momento o programa estará rodando.
+# Digite os números e operações que deseja realizar.
+# O programa para de executar quando a operação IGUAL for escolhida
+
+```
+
 ## Descrição
 Uma calculadora é um objeto que tem como função receber operações matemáticas, processá-las e exibir o resultado para o usuário. Dessa forma ela pode ser dividida em três partes:
 
@@ -64,6 +81,8 @@ Recebe um número inteiro e o escreve em `memory` com base no `write` index.
 Se `wi` for `0`, escreve e o muda para 1.
 Se `wi` for `1`, escreve e o muda para 0.
 
+##### setOperation
+Recebe um `valor de Operation` e seta `operation` para o valor recebido
 
 ### Tela - Display
 É onde são mostrados os resultados das operações.

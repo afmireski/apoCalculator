@@ -1,4 +1,8 @@
-
+/**
+ * Aluno: André Felipe Mireski
+ * Disciplina: APO
+ * Arquivo: calculator.hpp
+*/
 enum Operation
 {
     AC = 0,
@@ -26,7 +30,7 @@ class Cpu
 {
     float *memory;
     Operation operation;
-    unsigned char writeIndex;
+    unsigned short writeIndex;
 
 public:
     Cpu();

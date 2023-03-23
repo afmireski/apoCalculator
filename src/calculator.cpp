@@ -1,6 +1,13 @@
+/**
+ * Aluno: André Felipe Mireski
+ * Disciplina: APO
+ * Arquivo: calculator.cpp
+*/
+
 #include "calculator.hpp"
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 using namespace std;
 
 /**
@@ -67,11 +74,11 @@ float Cpu::calculate()
         break;
 
     case DIV:
-        response = this->memory[0] - this->memory[1];
+        response = this->memory[0] / this->memory[1];
         break;
 
     case RAD:
-        response = this->memory[0] - this->memory[1];
+        response = sqrtf(this->memory[0]);
         break;
 
     default: // EQU
@@ -99,13 +106,13 @@ void Cpu::write(float value)
 {
     this->memory[writeIndex] = value;
 
-    if (writeIndex == 1)
+    if (this->writeIndex == 1)
     {
-        writeIndex = 0;
+        this->writeIndex = 0;
     }
     else
     {
-        writeIndex = 1;
+        this->writeIndex = 1;
     }
 }
 
