@@ -34,30 +34,17 @@ Retorna o valor de `value`.
 
 ### Teclado - Keyboard
 É a parte da calculadora responsável por receber as entradas do usuário e chamar o processamento das operações. Conforme o usuário digita os números e as operações o resultado vai sendo calculado, armazenado na memória e exibido na tela.
+Todo `teclado` é composto por várias `teclas` que podem se referir a `dígitos` ou a `operações`. Conforme `dígitos` vão sendo digitados, seus valores vão sendo concatenados num `buffer` e exibidos na `tela`. Já quando uma `operação` é digitada o valor do `buffer` é enviado para a `CPU` e ele resetado.
 Nesse contexto, as características dessa classe são:
 
 #### Atributos
-- A princípio não possuíra nenhum.
+- **buffer:** é a variável responsável por concatenar os valores digitados.
+- **keys:** é a variável que armazena todas as teclas que o teclado possuí.
 
 #### Métodos
 
-##### lerNumero - readNumber:
-Esse método receberá a entrada do usuário de um número real. Caso não seja uma entrada válida, retornar exceção. Se a entrada for válida retornar o valor lido.
-
-##### lerOperacao - readOperation
-Esse método receberá como entrada um número inteiro que representará uma das operações possíveis da calculadora:
-- **AC = 0**
-- **Adição = 1**
-- **Subtração = 2**
-- **Multiplicação = 3**
-- **Divisão = 4**
-- **Radiciação = 5**
-- **Igualdade = 6**
-
-Se o número informado não for positivo ou não estiver no intervalo considerado, assume-se que será realizado **AC**.
-Caso seja informado **AC** limpar a memória.
-Caso seja informado **IGUAL** calcular a operação com os valores na memória.
-Caso ao armazenar na memória já haja uma operação salva ali diferente de **AC ou IGUAL**, calcular a operação usando os valores na memória e armazenar a nova operação.
+##### envia o valor do Buffer - sendBufferValue
+Pega o valor do buffer, o converte de `string` para `float` e o retorna.
 
 
 ### CPU
