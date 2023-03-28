@@ -19,7 +19,10 @@ make calculator
 ```
 
 ## Descrição
-Uma calculadora é um objeto que tem como função receber operações matemáticas, processá-las e exibir o resultado para o usuário. Dessa forma ela pode ser dividida em três partes:
+Uma calculadora é um objeto que tem como função receber operações matemáticas, processá-las e exibir o resultado para o usuário. Dessa forma ela pode ser dividida nas seguintes partes:
+
+### Tecla - Key
+É a parte da calculadora que tem como valor um dígito ou uma operação.
 
 ### Teclado - Keyboard
 É a parte da calculadora responsável por receber as entradas do usuário e chamar o processamento das operações. Conforme o usuário digita os números e as operações o resultado vai sendo calculado, armazenado na memória e exibido na tela.
