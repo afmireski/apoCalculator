@@ -22,7 +22,15 @@ make calculator
 Uma calculadora é um objeto que tem como função receber operações matemáticas, processá-las e exibir o resultado para o usuário. Dessa forma ela pode ser dividida nas seguintes partes:
 
 ### Tecla - Key
-É a parte da calculadora que tem como valor um dígito ou uma operação.
+É a parte da calculadora que tem como valor um `dígito` ou uma `operação`. Quando a tecla é pressionada ela devolve seu valor.
+
+#### Atributos
+- **value:** o valor da tecla, que pode ser uma `operation` ou um `digit`.
+
+#### Métodos
+
+##### press
+Retorna o valor de `value`.
 
 ### Teclado - Keyboard
 É a parte da calculadora responsável por receber as entradas do usuário e chamar o processamento das operações. Conforme o usuário digita os números e as operações o resultado vai sendo calculado, armazenado na memória e exibido na tela.
