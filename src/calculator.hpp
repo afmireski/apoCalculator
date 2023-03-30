@@ -1,20 +1,5 @@
 #include <interfaces.hpp>
 
-class Keyboard : KeyboardInterface
-{
-    Key* keys;
-
-
-public:
-    Keyboard();
-
-    ~Keyboard();
-
-    float readNumber();
-
-    Operation readOperation();
-};
-
 class Cpu : CpuInterface
 {
     float *memory;
