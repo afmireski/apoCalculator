@@ -14,6 +14,9 @@ public:
 
 class Keyboard : KeyboardInterface
 {
+    Key* keys;
+
+
 public:
     Keyboard();
 
