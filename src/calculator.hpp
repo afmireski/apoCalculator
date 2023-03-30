@@ -1,20 +1,6 @@
-/**
- * Aluno: André Felipe Mireski
- * Disciplina: APO
- * Arquivo: calculator.hpp
-*/
-enum Operation
-{
-    AC = 0,
-    SUM = 1,
-    SUB = 2,
-    MLT = 3,
-    DIV = 4,
-    RAD = 5,
-    EQU = 6
-};
+#include <interfaces.hpp>
 
-class Keyboard
+class Keyboard : KeyboardInterface
 {
 public:
     Keyboard();
@@ -26,7 +12,7 @@ public:
     Operation readOperation();
 };
 
-class Cpu
+class Cpu : CpuInterface
 {
     float *memory;
     Operation operation;
@@ -46,7 +32,7 @@ public:
     void setOperation(Operation value);
 };
 
-class Display
+class Display : DisplayInterface
 {
 public:
     Display();
@@ -60,7 +46,7 @@ public:
     void showResult(float value);
 };
 
-class Calculator
+class Calculator : CalculatorInterface
 {
     Display* display;
 
