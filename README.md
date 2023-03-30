@@ -38,7 +38,6 @@ Todo `teclado` é composto por várias `teclas` que podem se referir a `dígitos
 Nesse contexto, as características dessa classe são:
 
 #### Atributos
-- **buffer:** é a variável responsável por concatenar os valores digitados.
 - **keys:** é a variável que armazena todas as teclas que o teclado possuí.
 
 #### Métodos
@@ -84,21 +83,17 @@ Se `wi` for `1`, escreve e o muda para 0.
 Recebe um `valor de Operation` e seta `operation` para o valor recebido
 
 ### Tela - Display
-É onde são mostrados os resultados das operações.
+É onde são mostrados os dígitos e resultado das operações que o usuário realiza.
 
 #### Atributos
-- Não possuíra.
+- **buffer:** é a variável responsável por concatenar os valores digitados.
+
+
 
 #### Métodos
 
 ##### showMessage
-Esse método recebe uma `string` e a mostra no terminal.
-
-##### showOperations
-Esse método mostra um menu contendo todas as opções que podem ser realizadas pela calculadora.
-
-##### showResult
-Recebe um número e o exibe para o usuário, seguindo precisão de 3 casas decimais.
+Esse método recebe um `número` e o mostra no terminal.
 
 
 ### Calculadora - Tela
@@ -119,3 +114,8 @@ Fornece acesso à CPU da calculadora;
 
 ##### getKeyboard
 Fornece acesso ao keyboard da calculadora;
+
+## Sobre a Implementação
+- Primeiro serão implementadas as `interfaces`, ou `classes abstratas`, num arquivo `interfaces.hpp`, seguindo a descrição acima.
+- Depois será criado um arquivo `.hpp`, `calculator.hpp`, `display.hpp`, que implementará cada `interface`.
+- Por fim serão criados um `arquivo.cpp` para cada `arquivo.hpp`.
