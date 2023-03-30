@@ -23,6 +23,16 @@ enum Digit
     NINE,
 };
 
+union KeyValue {
+    Operation operation;
+    Digit digit;
+};
+
+class KeyInterface {
+    public:
+        virtual KeyValue press() = 0;
+};
+
 class KeyboardInterface
 {
 public:
