@@ -88,18 +88,15 @@ Recebe um `valor de Operation` e seta `operation` para o valor recebido
 É onde são mostrados os dígitos e resultado das operações que o usuário realiza.
 
 #### Atributos
-- **buffer:** é a variável responsável por concatenar os valores digitados.
+- Não possuí.
 
 #### Métodos
 
-##### showMessage
-Esse método imprime o `buffer`.
-
 ##### clean
-Esse método limpa o `buffer`.
+Esse método printa um `\n`.
 
-##### write
-Esse método recebe um `dígito` e o adiciona no `buffer`.
+##### show
+Esse método recebe um `dígito` e o printa sem quebrar a linha.
 
 
 ### Calculadora - Tela
