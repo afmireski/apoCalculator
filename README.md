@@ -32,6 +32,7 @@ Uma calculadora é um objeto que tem como função receber operações matem
 ##### press
 Retorna o valor de `value`.
 
+
 ### Teclado - Keyboard
 É a parte da calculadora responsável por receber as entradas do usuário e chamar o processamento das operações. Conforme o usuário digita os números e as operações o resultado vai sendo calculado, armazenado na memória e exibido na tela.
 Todo `teclado` é composto por várias `teclas` que podem se referir a `dígitos` ou a `operações`. Conforme `dígitos` vão sendo digitados, seus valores vão sendo concatenados num `buffer` e exibidos na `tela`. Já quando uma `operação` é digitada o valor do `buffer` é enviado para a `CPU` e ele resetado.
@@ -82,18 +83,23 @@ Se `wi` for `1`, escreve e o muda para 0.
 ##### setOperation
 Recebe um `valor de Operation` e seta `operation` para o valor recebido
 
+
 ### Tela - Display
 É onde são mostrados os dígitos e resultado das operações que o usuário realiza.
 
 #### Atributos
 - **buffer:** é a variável responsável por concatenar os valores digitados.
 
-
-
 #### Métodos
 
 ##### showMessage
-Esse método recebe um `número` e o mostra no terminal.
+Esse método imprime o `buffer`.
+
+##### clean
+Esse método limpa o `buffer`.
+
+##### write
+Esse método recebe um `dígito` e o adiciona no `buffer`.
 
 
 ### Calculadora - Tela
