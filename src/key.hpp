@@ -1,6 +1,6 @@
 #include "interfaces.hpp"
 
-class Key : KeyInterface
+class Key : public KeyInterface
 {
     KeyValue value;
 

@@ -1,7 +1,7 @@
 #include "interfaces.hpp"
 #include "key.hpp"
 
-class Keyboard : KeyboardInterface
+class Keyboard : public KeyboardInterface
 {
     Key *keys;
 

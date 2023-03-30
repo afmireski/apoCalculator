@@ -1,6 +1,6 @@
 #include "interfaces.hpp"
 
-class Cpu : CpuInterface
+class Cpu : public CpuInterface
 {
     float *memory;
     Operation operation;

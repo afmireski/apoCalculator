@@ -1,18 +1,7 @@
-#include <interfaces.hpp>
-
-class Display : DisplayInterface
-{
-public:
-    Display();
-
-    ~Display();
-
-    void showMessage(const char *message);
-
-    void showOperations();
-
-    void showResult(float value);
-};
+#include "interfaces.hpp"
+#include "keyboard.hpp"
+#include "cpu.hpp"
+#include "display.hpp"
 
 class Calculator : CalculatorInterface
 {
