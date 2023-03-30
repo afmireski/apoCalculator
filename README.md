@@ -19,34 +19,32 @@ make calculator
 ```
 
 ## Descrição
-Uma calculadora é um objeto que tem como função receber operações matemáticas, processá-las e exibir o resultado para o usuário. Dessa forma ela pode ser dividida em três partes:
+Uma calculadora é um objeto que tem como função receber operações matemáticas, processá-las e exibir o resultado para o usuário. Dessa forma ela pode ser dividida nas seguintes partes:
 
-### Teclado - Keyboard
-É a parte da calculadora responsável por receber as entradas do usuário e chamar o processamento das operações. Conforme o usuário digita os números e as operações o resultado vai sendo calculado, armazenado na memória e exibido na tela.
-Nesse contexto, as características dessa classe são:
+### Tecla - Key
+É a parte da calculadora que tem como valor um `dígito` ou uma `operação`. Quando a tecla é pressionada ela devolve seu valor.
 
 #### Atributos
-- A princípio não possuíra nenhum.
+- **value:** o valor da tecla, que pode ser uma `operation` ou um `digit`.
 
 #### Métodos
 
-##### lerNumero - readNumber:
-Esse método receberá a entrada do usuário de um número real. Caso não seja uma entrada válida, retornar exceção. Se a entrada for válida retornar o valor lido.
+##### press
+Retorna o valor de `value`.
 
-##### lerOperacao - readOperation
-Esse método receberá como entrada um número inteiro que representará uma das operações possíveis da calculadora:
-- **AC = 0**
-- **Adição = 1**
-- **Subtração = 2**
-- **Multiplicação = 3**
-- **Divisão = 4**
-- **Radiciação = 5**
-- **Igualdade = 6**
 
-Se o número informado não for positivo ou não estiver no intervalo considerado, assume-se que será realizado **AC**.
-Caso seja informado **AC** limpar a memória.
-Caso seja informado **IGUAL** calcular a operação com os valores na memória.
-Caso ao armazenar na memória já haja uma operação salva ali diferente de **AC ou IGUAL**, calcular a operação usando os valores na memória e armazenar a nova operação.
+### Teclado - Keyboard
+É a parte da calculadora responsável por receber as entradas do usuário e chamar o processamento das operações. Conforme o usuário digita os números e as operações o resultado vai sendo calculado, armazenado na memória e exibido na tela.
+Todo `teclado` é composto por várias `teclas` que podem se referir a `dígitos` ou a `operações`. Conforme `dígitos` vão sendo digitados, seus valores vão sendo concatenados num `buffer` e exibidos na `tela`. Já quando uma `operação` é digitada o valor do `buffer` é enviado para a `CPU` e ele resetado.
+Nesse contexto, as características dessa classe são:
+
+#### Atributos
+- **keys:** é a variável que armazena todas as teclas que o teclado possuí.
+
+#### Métodos
+
+##### envia o valor do Buffer - sendBufferValue
+Pega o valor do buffer, o converte de `string` para `float` e o retorna.
 
 
 ### CPU
@@ -71,6 +69,7 @@ Pega o valor de `operation` e verifica qual operação vai realizar:
   - memory[0] / memory[1]
 - Radiciação:
   - SQRT de memory[0]
+  
 Retorna o resultado.
  
 ##### ac
@@ -84,22 +83,20 @@ Se `wi` for `1`, escreve e o muda para 0.
 ##### setOperation
 Recebe um `valor de Operation` e seta `operation` para o valor recebido
 
+
 ### Tela - Display
-É onde são mostrados os resultados das operações.
+É onde são mostrados os dígitos e resultado das operações que o usuário realiza.
 
 #### Atributos
-- Não possuíra.
+- Não possuí.
 
 #### Métodos
 
-##### showMessage
-Esse método recebe uma `string` e a mostra no terminal.
+##### clean
+Esse método printa um `\n`.
 
-##### showOperations
-Esse método mostra um menu contendo todas as opções que podem ser realizadas pela calculadora.
-
-##### showResult
-Recebe um número e o exibe para o usuário, seguindo precisão de 3 casas decimais.
+##### show
+Esse método recebe um `dígito` e o printa sem quebrar a linha.
 
 
 ### Calculadora - Tela
@@ -120,3 +117,8 @@ Fornece acesso à CPU da calculadora;
 
 ##### getKeyboard
 Fornece acesso ao keyboard da calculadora;
+
+## Sobre a Implementação
+- Primeiro serão implementadas as `interfaces`, ou `classes abstratas`, num arquivo `interfaces.hpp`, seguindo a descrição acima.
+- Depois será criado um arquivo `.hpp`, `calculator.hpp`, `display.hpp`, que implementará cada `interface`.
+- Por fim serão criados um `arquivo.cpp` para cada `arquivo.hpp`.

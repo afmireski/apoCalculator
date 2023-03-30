@@ -7,3 +7,4 @@
 
 
 # CHANGED
+    #7 - Refactor `README.md`
