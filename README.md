@@ -69,6 +69,7 @@ Pega o valor de `operation` e verifica qual operação vai realizar:
   - memory[0] / memory[1]
 - Radiciação:
   - SQRT de memory[0]
+  
 Retorna o resultado.
  
 ##### ac
