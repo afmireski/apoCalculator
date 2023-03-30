@@ -1,5 +1,17 @@
 #include <interfaces.hpp>
 
+class Key : KeyInterface
+{
+    KeyValue value;
+
+public:
+    Key();
+
+    ~Key();
+
+    KeyValue press();
+};
+
 class Keyboard : KeyboardInterface
 {
 public:
@@ -48,11 +60,11 @@ public:
 
 class Calculator : CalculatorInterface
 {
-    Display* display;
+    Display *display;
 
-    Cpu* cpu;
+    Cpu *cpu;
 
-    Keyboard* keyboard;
+    Keyboard *keyboard;
 
 public:
     Calculator();
