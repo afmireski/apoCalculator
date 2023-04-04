@@ -1,72 +1,15 @@
-/**
- * Aluno: André Felipe Mireski
- * Disciplina: APO
- * Arquivo: calculator.hpp
-*/
-enum Operation
+#include "interfaces.hpp"
+#include "keyboard.hpp"
+#include "cpu.hpp"
+#include "display.hpp"
+
+class Calculator : CalculatorInterface
 {
-    AC = 0,
-    SUM = 1,
-    SUB = 2,
-    MLT = 3,
-    DIV = 4,
-    RAD = 5,
-    EQU = 6
-};
+    Display *display;
 
-class Keyboard
-{
-public:
-    Keyboard();
+    Cpu *cpu;
 
-    ~Keyboard();
-
-    float readNumber();
-
-    Operation readOperation();
-};
-
-class Cpu
-{
-    float *memory;
-    Operation operation;
-    unsigned short writeIndex;
-
-public:
-    Cpu();
-
-    ~Cpu();
-
-    float calculate();
-
-    void ac();
-
-    void write(float value);
-
-    void setOperation(Operation value);
-};
-
-class Display
-{
-public:
-    Display();
-
-    ~Display();
-
-    void showMessage(const char *message);
-
-    void showOperations();
-
-    void showResult(float value);
-};
-
-class Calculator
-{
-    Display* display;
-
-    Cpu* cpu;
-
-    Keyboard* keyboard;
+    Keyboard *keyboard;
 
 public:
     Calculator();
