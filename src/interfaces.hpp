@@ -76,7 +76,7 @@ public:
     virtual void receive(Operation) = 0;
     virtual void receive(Control) = 0;
 
-    virtual void setDisplay(DisplayInterface*);
+    virtual void setDisplay(DisplayInterface*) = 0;
 };
 
 class DisplayInterface
