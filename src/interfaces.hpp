@@ -31,20 +31,25 @@ enum Control {
     OFF,
 };
 
-template <typename T> class KeyInterface {
+class KeyInterface {
     public:
         virtual void press() = 0;
         virtual char const* getSymbol() = 0;
         virtual void setKeyboard(KeyboardInterface*) = 0;
-        virtual T getValue() = 0;
 };
 
 class KeyboardInterface
 {
 public:
-    virtual float readNumber() = 0;
+    virtual void receive(Digit) = 0;
+    virtual void receive(Operation) = 0;
+    virtual void receive(Control) = 0;
 
-    virtual Operation readOperation() = 0;
+    virtual KeyInterface* getKey(Digit) = 0;
+    virtual KeyInterface* getKey(Operation) = 0;
+    virtual KeyInterface* getKey(Control) = 0;
+
+    virtual void addKey(Key*) = 0;
 };
 
 class CpuInterface
