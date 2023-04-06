@@ -90,8 +90,11 @@ class CalculatorInterface
 {
 public:
     virtual DisplayInterface *getDisplay() = 0;
+    virtual void setDisplay() = 0;
 
     virtual CpuInterface *getCpu() = 0;
+    virtual void *setCpu() = 0;
 
     virtual KeyboardInterface *getKeyboard() = 0;
+    virtual void *setKeyboard() = 0;
 };
