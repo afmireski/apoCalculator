@@ -40,3 +40,23 @@ public:
 
     Operation getOperation();
 };
+
+class KeyControl : public KeyControlInterface
+{
+    Control control;
+
+    char const* symbol;
+
+    Keyboard* keyboard;
+
+public:
+    Key(char const* symbol, Control control, Keyboard* keyboard);
+
+    ~Key();
+
+    void press();
+
+    char const* getSymbol();
+
+    Control getControl();
+};
