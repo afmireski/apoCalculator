@@ -1,13 +1,22 @@
 #include "interfaces.hpp"
+#include "keyboard.hpp"
 
-class Key : public KeyInterface
+class KeyDigit : public KeyDigitInterface
 {
-    KeyValue value;
+    Digit digit;
+
+    char const* symbol;
+
+    Keyboard* keyboard;
 
 public:
-    Key();
+    Key(char const* symbol, Digit digit, Keyboard* keyboard);
 
     ~Key();
 
-    KeyValue press();
+    void press();
+
+    char const* getSymbol();
+
+    Digit getDigit();
 };
