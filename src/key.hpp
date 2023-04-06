@@ -20,3 +20,23 @@ public:
 
     Digit getDigit();
 };
+
+class KeyOperation : public KeyOperationInterface
+{
+    Operation operation;
+
+    char const* symbol;
+
+    Keyboard* keyboard;
+
+public:
+    Key(char const* symbol, Operation operation, Keyboard* keyboard);
+
+    ~Key();
+
+    void press();
+
+    char const* getSymbol();
+
+    Operation getOperation();
+};
