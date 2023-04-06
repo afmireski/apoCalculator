@@ -31,9 +31,12 @@ enum Control {
     OFF,
 };
 
-class KeyInterface {
+template <typename T> class KeyInterface {
     public:
         virtual void press() = 0;
+        virtual char const* getSymbol() = 0;
+        virtual void setKeyboard(KeyboardInterface*) = 0;
+        virtual T getValue() = 0;
 };
 
 class KeyboardInterface
