@@ -1,12 +1,11 @@
 enum Operation
 {
-    AC,
     SUM,
     SUB,
     MLT,
     DIV,
     RAD,
-    EQU,
+    PER,
 };
 
 enum Digit
@@ -23,14 +22,18 @@ enum Digit
     NINE,
 };
 
-union KeyValue {
-    Operation operation;
-    Digit digit;
+enum Control {
+    CE,
+    MRC,
+    M_LESS,
+    M_PLUS,
+    EQUAL,
+    OFF,
 };
 
 class KeyInterface {
     public:
-        virtual KeyValue press() = 0;
+        virtual void press() = 0;
 };
 
 class KeyboardInterface
