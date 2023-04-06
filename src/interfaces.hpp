@@ -43,14 +43,14 @@ class KeyDigitInterface: public KeyInterface {
         virtual Digit getDigit() = 0;
 };
 
-class KeyOperatorInterface: public KeyInterface {
+class KeyOperationInterface: public KeyInterface {
     public:
-        virtual Digit getOperator() = 0;
+        virtual Operation getOperation() = 0;
 };
 
 class KeyControlInterface: public KeyInterface {
     public:
-        virtual Digit getControl() = 0;
+        virtual Control getControl() = 0;
 };
 
 class KeyboardInterface

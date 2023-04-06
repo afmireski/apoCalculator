@@ -1,22 +1,38 @@
 #include "interfaces.hpp"
-#include "keyboard.hpp"
 
-class KeyDigit : public KeyDigitInterface
+class Key : public KeyInterface
 {
-    Digit digit;
+    char const *symbol;
 
-    char const* symbol;
-
-    Keyboard* keyboard;
+    KeyboardInterface *keyboard;
 
 public:
-    Key(char const* symbol, Digit digit, Keyboard* keyboard);
+    Key(char const *symbol, KeyboardInterface *keyboard);
 
     ~Key();
 
     void press();
 
-    char const* getSymbol();
+    char const *getSymbol();
+
+};
+
+class KeyDigit : public KeyDigitInterface
+{
+    Digit digit;
+
+    char const *symbol;
+
+    KeyboardInterface *keyboard;
+
+public:
+    KeyDigit(char const *symbol, Digit digit, KeyboardInterface *keyboard);
+
+    ~KeyDigit();
+
+    void press();
+
+    char const *getSymbol();
 
     Digit getDigit();
 };
@@ -25,18 +41,18 @@ class KeyOperation : public KeyOperationInterface
 {
     Operation operation;
 
-    char const* symbol;
+    char const *symbol;
 
-    Keyboard* keyboard;
+    KeyboardInterface *keyboard;
 
 public:
-    Key(char const* symbol, Operation operation, Keyboard* keyboard);
+    KeyOperation(char const *symbol, Operation operation, KeyboardInterface *keyboard);
 
-    ~Key();
+    ~KeyOperation();
 
     void press();
 
-    char const* getSymbol();
+    char const *getSymbol();
 
     Operation getOperation();
 };
@@ -45,18 +61,18 @@ class KeyControl : public KeyControlInterface
 {
     Control control;
 
-    char const* symbol;
+    char const *symbol;
 
-    Keyboard* keyboard;
+    KeyboardInterface *keyboard;
 
 public:
-    Key(char const* symbol, Control control, Keyboard* keyboard);
+    KeyControl(char const *symbol, Control control, KeyboardInterface *keyboard);
 
-    ~Key();
+    ~KeyControl();
 
     void press();
 
-    char const* getSymbol();
+    char const *getSymbol();
 
     Control getControl();
 };

@@ -1,16 +1,24 @@
 #include "interfaces.hpp"
-#include "key.hpp"
 
 class Keyboard : public KeyboardInterface
 {
-    Key *keys;
+    KeyInterface *keys;
+
+    CpuInterface* cpu;
 
 public:
     Keyboard();
 
     ~Keyboard();
 
-    float readNumber();
+    void receive(Digit);
+    void receive(Operation);
+    void receive(Control);
 
-    Operation readOperation();
+    KeyInterface *getKey(Digit);
+    KeyInterface *getKey(Operation);
+    KeyInterface *getKey(Control);
+
+    void addKey(KeyInterface *);
+    void setCpu(CpuInterface *);
 };
