@@ -38,6 +38,21 @@ class KeyInterface {
         virtual void setKeyboard(KeyboardInterface*) = 0;
 };
 
+class KeyDigitInterface: public KeyInterface {
+    public:
+        virtual Digit getDigit() = 0;
+};
+
+class KeyOperatorInterface: public KeyInterface {
+    public:
+        virtual Digit getOperator() = 0;
+};
+
+class KeyControlInterface: public KeyInterface {
+    public:
+        virtual Digit getControl() = 0;
+};
+
 class KeyboardInterface
 {
 public:
