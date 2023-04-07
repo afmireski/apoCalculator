@@ -15,6 +15,8 @@ public:
 
     char const *getSymbol();
 
+    void setKeyboard(KeyboardInterface*);
+
 };
 
 class KeyDigit : public KeyDigitInterface
@@ -35,6 +37,8 @@ public:
     char const *getSymbol();
 
     Digit getDigit();
+
+    void setKeyboard(KeyboardInterface*);
 };
 
 class KeyOperation : public KeyOperationInterface
@@ -55,6 +59,8 @@ public:
     char const *getSymbol();
 
     Operation getOperation();
+
+    void setKeyboard(KeyboardInterface*);
 };
 
 class KeyControl : public KeyControlInterface
@@ -75,4 +81,6 @@ public:
     char const *getSymbol();
 
     Control getControl();
+    
+    void setKeyboard(KeyboardInterface*);
 };

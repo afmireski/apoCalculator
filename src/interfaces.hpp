@@ -1,3 +1,5 @@
+#ifndef OperationH
+#define OperationH
 enum Operation
 {
     SUM,
@@ -7,7 +9,10 @@ enum Operation
     RAD,
     PER,
 };
+#endif
 
+#ifndef DigitH
+#define DigitH
 enum Digit
 {
     ZERO,
@@ -21,7 +26,10 @@ enum Digit
     EIGHT,
     NINE,
 };
+#endif
 
+#ifndef ControlH
+#define ControlH
 enum Control {
     CE,
     MRC,
@@ -30,29 +38,71 @@ enum Control {
     EQUAL,
     OFF,
 };
+#endif
 
+class KeyboardInterface;
+
+#ifndef DisplayH
+#define DisplayH
+class DisplayInterface
+{
+public:
+    virtual void show(Digit) = 0;
+    virtual void clear() = 0;
+};
+#endif
+
+#ifndef CpuH
+#define CpuH
+class CpuInterface
+{
+public:
+    virtual void receive(Digit) = 0;
+    virtual void receive(Operation) = 0;
+    virtual void receive(Control) = 0;
+
+    virtual void setDisplay(DisplayInterface*) = 0;
+};
+#endif
+
+
+#ifndef KeyH
+#define KeyH
 class KeyInterface {
     public:
         virtual void press() = 0;
         virtual char const* getSymbol() = 0;
         virtual void setKeyboard(KeyboardInterface*) = 0;
 };
+#endif
 
+
+#ifndef KeyDigitH
+#define KeyDigitH
 class KeyDigitInterface: public KeyInterface {
     public:
         virtual Digit getDigit() = 0;
 };
+#endif
 
+#ifndef KeyOpeationH
+#define KeyOpeationH
 class KeyOperationInterface: public KeyInterface {
     public:
         virtual Operation getOperation() = 0;
 };
+#endif
 
+#ifndef KeyControlH
+#define KeyControlH
 class KeyControlInterface: public KeyInterface {
     public:
         virtual Control getControl() = 0;
 };
+#endif
 
+#ifndef KeyboardH
+#define KeyboardH
 class KeyboardInterface
 {
 public:
@@ -68,24 +118,10 @@ public:
 
     virtual void setCpu(CpuInterface*) = 0;
 };
+#endif
 
-class CpuInterface
-{
-public:
-    virtual void receive(Digit) = 0;
-    virtual void receive(Operation) = 0;
-    virtual void receive(Control) = 0;
-
-    virtual void setDisplay(DisplayInterface*) = 0;
-};
-
-class DisplayInterface
-{
-public:
-    virtual void show(Digit) = 0;
-    virtual void clear() = 0;
-};
-
+#ifndef CalculatorH
+#define CalculatorH
 class CalculatorInterface
 {
 public:
@@ -98,3 +134,4 @@ public:
     virtual KeyboardInterface *getKeyboard() = 0;
     virtual void *setKeyboard() = 0;
 };
+#endif
