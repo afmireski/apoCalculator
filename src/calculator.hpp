@@ -1,24 +1,24 @@
 #include "interfaces.hpp"
-#include "keyboard.hpp"
-#include "cpu.hpp"
-#include "display.hpp"
 
 class Calculator : CalculatorInterface
 {
-    Display *display;
+    DisplayInterface *display;
 
-    Cpu *cpu;
+    CpuInterface *cpu;
 
-    Keyboard *keyboard;
+    KeyboardInterface *keyboard;
 
 public:
     Calculator();
 
     ~Calculator();
 
-    Display *getDisplay();
+    DisplayInterface *getDisplay();
+    void setDisplay(DisplayInterface*);
 
-    Cpu *getCpu();
+    CpuInterface *getCpu();
+    void setCpu(CpuInterface*);
 
-    Keyboard *getKeyboard();
+    KeyboardInterface *getKeyboard();
+    void setKeyboard(KeyboardInterface*);
 };
