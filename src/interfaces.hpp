@@ -1,14 +1,18 @@
+#ifndef OperationH
+#define OperationH
 enum Operation
 {
-    AC,
     SUM,
     SUB,
     MLT,
     DIV,
     RAD,
-    EQU,
+    PER,
 };
+#endif
 
+#ifndef DigitH
+#define DigitH
 enum Digit
 {
     ZERO,
@@ -22,53 +26,112 @@ enum Digit
     EIGHT,
     NINE,
 };
+#endif
 
-union KeyValue {
-    Operation operation;
-    Digit digit;
+#ifndef ControlH
+#define ControlH
+enum Control {
+    CE,
+    MRC,
+    M_LESS,
+    M_PLUS,
+    EQUAL,
+    OFF,
 };
+#endif
 
-class KeyInterface {
-    public:
-        virtual KeyValue press() = 0;
-};
+class KeyboardInterface;
 
-class KeyboardInterface
-{
-public:
-    virtual float readNumber() = 0;
-
-    virtual Operation readOperation() = 0;
-};
-
-class CpuInterface
-{
-public:
-    virtual float calculate() = 0;
-
-    virtual void ac() = 0;
-
-    virtual void write(float value) = 0;
-
-    virtual void setOperation(Operation value) = 0;
-};
-
+#ifndef DisplayH
+#define DisplayH
 class DisplayInterface
 {
 public:
-    virtual void showMessage(const char *message) = 0;
-
-    virtual void showOperations() = 0;
-
-    virtual void showResult(float value) = 0;
+    virtual void show(Digit) = 0;
+    virtual void clear() = 0;
 };
+#endif
 
+#ifndef CpuH
+#define CpuH
+class CpuInterface
+{
+public:
+    virtual void receive(Digit) = 0;
+    virtual void receive(Operation) = 0;
+    virtual void receive(Control) = 0;
+
+    virtual void setDisplay(DisplayInterface*) = 0;
+};
+#endif
+
+
+#ifndef KeyH
+#define KeyH
+class KeyInterface {
+    public:
+        virtual void press() = 0;
+        virtual char const* getSymbol() = 0;
+        virtual void setKeyboard(KeyboardInterface*) = 0;
+};
+#endif
+
+
+#ifndef KeyDigitH
+#define KeyDigitH
+class KeyDigitInterface: public KeyInterface {
+    public:
+        virtual Digit getDigit() = 0;
+};
+#endif
+
+#ifndef KeyOpeationH
+#define KeyOpeationH
+class KeyOperationInterface: public KeyInterface {
+    public:
+        virtual Operation getOperation() = 0;
+};
+#endif
+
+#ifndef KeyControlH
+#define KeyControlH
+class KeyControlInterface: public KeyInterface {
+    public:
+        virtual Control getControl() = 0;
+};
+#endif
+
+#ifndef KeyboardH
+#define KeyboardH
+class KeyboardInterface
+{
+public:
+    virtual void receive(Digit) = 0;
+    virtual void receive(Operation) = 0;
+    virtual void receive(Control) = 0;
+
+    virtual KeyInterface* getKey(Digit) = 0;
+    virtual KeyInterface* getKey(Operation) = 0;
+    virtual KeyInterface* getKey(Control) = 0;
+
+    virtual void addKey(KeyInterface*) = 0;
+
+    virtual void setCpu(CpuInterface*) = 0;
+};
+#endif
+
+#ifndef CalculatorH
+#define CalculatorH
 class CalculatorInterface
 {
 public:
     virtual DisplayInterface *getDisplay() = 0;
+    virtual void setDisplay() = 0;
 
     virtual CpuInterface *getCpu() = 0;
+    virtual void *setCpu() = 0;
 
     virtual KeyboardInterface *getKeyboard() = 0;
+    virtual void *setKeyboard() = 0;
 };
+#endif

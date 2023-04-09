@@ -8,4 +8,5 @@
 
 
 # CHANGED
+    #14 - Fix project structure
     #7 - Refactor `README.md`

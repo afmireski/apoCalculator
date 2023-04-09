@@ -6,16 +6,16 @@ class Cpu : public CpuInterface
     Operation operation;
     unsigned short writeIndex;
 
+    DisplayInterface* display;
+
 public:
     Cpu();
 
     ~Cpu();
 
-    float calculate();
+    void receive(Digit);
+    void receive(Operation);
+    void receive(Control);
 
-    void ac();
-
-    void write(float value);
-
-    void setOperation(Operation value);
+    void setDisplay(DisplayInterface*);
 };

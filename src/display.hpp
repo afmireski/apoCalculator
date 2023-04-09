@@ -7,9 +7,7 @@ public:
 
     ~Display();
 
-    void showMessage(const char *message);
+    void show(Digit);
 
-    void showOperations();
-
-    void showResult(float value);
+    void clear();
 };
