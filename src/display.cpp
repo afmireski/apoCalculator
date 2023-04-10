@@ -44,3 +44,7 @@ void Display::show(Digit digit) {
         cout << "E";
     }
 }
+
+void Display::clear() {
+    cout << "\n0";
+}
