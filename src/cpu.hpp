@@ -31,9 +31,11 @@ public:
 
 class Cpu : public CpuInterface
 {
-    float *memory;
+    Register* registerOne;
+    Register* registerTwo;
+    Register* memoryRegister;
     Operation operation;
-    unsigned short writeIndex;
+    unsigned char writeIndex;
 
     DisplayInterface *display;
 
