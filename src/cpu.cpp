@@ -34,3 +34,7 @@ float Register::getDecimalValue() {
 void Register::setDecimalSeparator(bool value) {
     this->hasSeparator = value;
 };
+
+bool Register::hasDecimalSeparator() {
+    return this->hasSeparator;
+}
