@@ -4,7 +4,7 @@ class Register : public RegisterInterface
 {
     float intValue;
     float decimalValue;
-    bool hasDecimalSeparator;
+    bool hasSeparator;
     Signal signal;
 
 public:
