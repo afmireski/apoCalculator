@@ -24,9 +24,13 @@ float Register::getIntValue() {
 };
 
 float Register::getDecimalValue() {
-    float value = decimalValue;
-    
+    float value = this->decimalValue;
+
     while(value > 0.0) value *= 0.1;
 
     return value;
+};
+
+void Register::setDecimalSeparator(bool value) {
+    this->hasSeparator = value;
 };
