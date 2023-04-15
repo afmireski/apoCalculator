@@ -14,7 +14,7 @@ public:
 
     ~Register();
 
-    void updateValue(float);
+    void updateValue(int);
 
     float getIntValue();
 
