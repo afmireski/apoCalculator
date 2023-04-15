@@ -6,3 +6,5 @@ Register::Register() {
     this->hasSeparator = false;
     this->signal = POSITIVE;
 };
+
+Register::~Register() {};
