@@ -5,6 +5,16 @@ Register::Register() {
     this->decimalValue = 0.0;
     this->hasSeparator = false;
     this->signal = POSITIVE;
+    this->bitLen = 1;
 };
 
 Register::~Register() {};
+
+void Register::updateValue(float value) {
+    if (this->hasDecimalSeparator()) {
+        this->decimalValue = (this->decimalValue * 10.0) + value;
+    } else {
+        this->intValue = (this->intValue * 10.0) + value;
+    }
+    if (this->bitLen != 1 || value > 0) this->bitLen++;
+};

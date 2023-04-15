@@ -6,6 +6,8 @@ class Register : public RegisterInterface
     float decimalValue;
     bool hasSeparator;
     Signal signal;
+    
+    unsigned char bitLen;
 
 public:
     Register();
