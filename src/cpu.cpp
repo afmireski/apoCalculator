@@ -18,3 +18,15 @@ void Register::updateValue(float value) {
     }
     if (this->bitLen != 1 || value > 0) this->bitLen++;
 };
+
+float Register::getIntValue() {
+    return this->intValue;
+};
+
+float Register::getDecimalValue() {
+    float value = decimalValue;
+    
+    while(value > 0.0) value *= 0.1;
+
+    return value;
+};
