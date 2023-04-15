@@ -30,13 +30,24 @@ enum Digit
 
 #ifndef ControlH
 #define ControlH
-enum Control {
+enum Control
+{
     CE,
     MRC,
     M_LESS,
     M_PLUS,
     EQUAL,
     OFF,
+    DECIMAL_SEPARATOR
+};
+#endif
+
+#ifndef SignalH
+#define SignalH
+enum Signal
+{
+    POSITIVE,
+    NEGATIVE
 };
 #endif
 
@@ -52,6 +63,29 @@ public:
 };
 #endif
 
+#ifndef RegisterH
+#define RegisterH
+class RegisterInterface
+{
+public:
+    virtual void updateValue(float) = 0;
+
+    virtual float getIntValue() = 0;
+
+    virtual float getDecimalValue() = 0;
+
+    virtual void setDecimalSeparator(bool) = 0;
+
+    virtual bool hasDecimalSeparator() = 0;
+
+    virtual Signal getSignal() = 0;
+    
+    virtual void setSignal(Signal) = 0;
+
+    virtual void reset() = 0;
+};
+#endif
+
 #ifndef CpuH
 #define CpuH
 class CpuInterface
@@ -61,43 +95,45 @@ public:
     virtual void receive(Operation) = 0;
     virtual void receive(Control) = 0;
 
-    virtual void setDisplay(DisplayInterface*) = 0;
+    virtual void setDisplay(DisplayInterface *) = 0;
 };
 #endif
-
 
 #ifndef KeyH
 #define KeyH
-class KeyInterface {
-    public:
-        virtual void press() = 0;
-        virtual char const* getSymbol() = 0;
-        virtual void setKeyboard(KeyboardInterface*) = 0;
+class KeyInterface
+{
+public:
+    virtual void press() = 0;
+    virtual char const *getSymbol() = 0;
+    virtual void setKeyboard(KeyboardInterface *) = 0;
 };
 #endif
 
-
 #ifndef KeyDigitH
 #define KeyDigitH
-class KeyDigitInterface: public KeyInterface {
-    public:
-        virtual Digit getDigit() = 0;
+class KeyDigitInterface : public KeyInterface
+{
+public:
+    virtual Digit getDigit() = 0;
 };
 #endif
 
 #ifndef KeyOpeationH
 #define KeyOpeationH
-class KeyOperationInterface: public KeyInterface {
-    public:
-        virtual Operation getOperation() = 0;
+class KeyOperationInterface : public KeyInterface
+{
+public:
+    virtual Operation getOperation() = 0;
 };
 #endif
 
 #ifndef KeyControlH
 #define KeyControlH
-class KeyControlInterface: public KeyInterface {
-    public:
-        virtual Control getControl() = 0;
+class KeyControlInterface : public KeyInterface
+{
+public:
+    virtual Control getControl() = 0;
 };
 #endif
 
@@ -110,13 +146,13 @@ public:
     virtual void receive(Operation) = 0;
     virtual void receive(Control) = 0;
 
-    virtual KeyInterface* getKey(Digit) = 0;
-    virtual KeyInterface* getKey(Operation) = 0;
-    virtual KeyInterface* getKey(Control) = 0;
+    virtual KeyInterface *getKey(Digit) = 0;
+    virtual KeyInterface *getKey(Operation) = 0;
+    virtual KeyInterface *getKey(Control) = 0;
 
-    virtual void addKey(KeyInterface*) = 0;
+    virtual void addKey(KeyInterface *) = 0;
 
-    virtual void setCpu(CpuInterface*) = 0;
+    virtual void setCpu(CpuInterface *) = 0;
 };
 #endif
 

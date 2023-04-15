@@ -1,8 +1,3 @@
-/**
- * Aluno: André Felipe Mireski
- * Disciplina: APO
- * Arquivo: main.cpp
-*/
 #include "display.hpp"
 #include "key.hpp"
 #include "keyboard.hpp"
