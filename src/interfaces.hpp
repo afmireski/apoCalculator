@@ -68,7 +68,7 @@ public:
 class RegisterInterface
 {
 public:
-    virtual void updateValue(float) = 0;
+    virtual void updateValue(int) = 0;
 
     virtual float getIntValue() = 0;
 

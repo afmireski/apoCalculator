@@ -1,6 +1,8 @@
 #include "cpu.hpp"
 #include <cstdlib>
 
+// -- Register --
+
 Register::Register()
 {
     this->reset();
@@ -64,4 +66,15 @@ void Register::reset()
     this->hasSeparator = false;
     this->signal = POSITIVE;
     this->bitLen = 1;
+}
+
+// -- CPU --
+Cpu::Cpu() {
+    this->registerOne = new Register();
+    this->registerTwo = new Register();
+    this->memoryRegister = new Register();
+    this->operation = SUM;
+    this->writeIndex = 0;
+
+    this->display = NULL;
 }
