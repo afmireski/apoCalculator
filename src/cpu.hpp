@@ -9,6 +9,12 @@ class Register : public RegisterInterface
 
     unsigned char bitLen;
 
+    float getIntValue();
+
+    float getDecimalValue();
+    
+    void countBits();
+
 public:
     Register();
 
@@ -16,9 +22,11 @@ public:
 
     void updateValue(int);
 
-    float getIntValue();
+    void setIntValue(int);
 
-    float getDecimalValue();
+    void setDecimalValue(float);
+
+    float getValue();
 
     void setDecimalSeparator(bool);
 

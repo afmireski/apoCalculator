@@ -1,5 +1,6 @@
 #include "cpu.hpp"
 #include <cstdlib>
+#include <cmath>
 
 // -- Register --
 
@@ -39,6 +40,31 @@ float Register::getDecimalValue()
     return value;
 }
 
+void Register::setIntValue(int value) {
+    this->intValue = value;
+    countBits();
+}
+
+void Register::setDecimalValue(float value) {
+    value = value - this->getIntValue();
+
+    while (value < 0.0)
+        value *= 10;
+    this->decimalValue = value;
+    countBits();
+}
+
+float Register::getValue()
+{
+    float value = this->getIntValue() + this->getDecimalValue();
+
+    if (this->getSignal() == NEGATIVE)
+    {
+        return -value;
+    }
+    return value;
+}
+
 void Register::setDecimalSeparator(bool value)
 {
     this->hasSeparator = value;
@@ -66,6 +92,19 @@ void Register::reset()
     this->hasSeparator = false;
     this->signal = POSITIVE;
     this->bitLen = 1;
+}
+
+void Register::countBits() {
+    this->bitLen = 1;
+    float intValue = this->getIntValue();
+    if (intValue > 0) {
+        this->bitLen = floor(log10f(intValue) + 1);
+    }
+
+    float decimalValue = this->getDecimalValue();
+    if (decimalValue > 0) {
+        this->bitLen += floor(log10f(intValue) + 1);
+    }
 }
 
 // -- CPU --
@@ -115,12 +154,57 @@ int Cpu::convertDigitToInt(Digit value)
     }
 }
 
-void Cpu::receive(Digit digit) {
+void Cpu::receive(Digit digit)
+{
     int value = convertDigitToInt(digit);
 
-    if (this->writeIndex == 0) {
+    if (this->writeIndex == 0)
+    {
         this->registerOne->updateValue(value);
-    } else {
+    }
+    else
+    {
         this->registerTwo->updateValue(value);
     }
+}
+
+void Cpu::receive(Operation operation)
+{
+    float valueOne = this->registerOne->getValue();
+    float valueTwo = this->registerTwo->getValue();
+
+    float response;
+    switch (operation)
+    {
+    case SUM:
+        response = valueOne + valueTwo;
+        break;
+    case SUB:
+        response = valueOne - valueTwo;
+        break;
+    case MLT:
+        response = valueOne * valueTwo;
+        break;
+    case DIV:
+        response = valueOne / valueTwo;
+        break;
+    case RAD:
+        // Exceção se for negativo
+        response = sqrtf(registerOne->getValue());
+        break;
+    default:
+        // throw error
+    }
+    registerOne->reset();
+    registerTwo->reset();
+    this->writeIndex = 1;
+
+    registerOne->setIntValue(response);
+    registerOne->setDecimalValue(response);
+    if (response < 0) {
+        registerOne->setSignal();
+    } else {
+        registerOne->setSignal(POSITIVE);
+    }
+
 }

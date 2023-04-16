@@ -67,19 +67,27 @@ public:
 #define RegisterH
 class RegisterInterface
 {
-public:
-    virtual void updateValue(int) = 0;
-
     virtual float getIntValue() = 0;
 
     virtual float getDecimalValue() = 0;
+
+    virtual void countBits() = 0;
+
+public:
+    virtual void updateValue(int) = 0;
+
+    virtual void setIntValue(int) = 0;
+
+    virtual void setDecimalValue(float) = 0;
+
+    virtual float getValue() = 0;
 
     virtual void setDecimalSeparator(bool) = 0;
 
     virtual bool hasDecimalSeparator() = 0;
 
     virtual Signal getSignal() = 0;
-    
+
     virtual void setSignal(Signal) = 0;
 
     virtual void reset() = 0;
@@ -91,6 +99,7 @@ public:
 class CpuInterface
 {
     virtual int convertDigitToInt(Digit) = 0;
+
 public:
     virtual void receive(Digit) = 0;
     virtual void receive(Operation) = 0;
