@@ -114,3 +114,13 @@ int Cpu::convertDigitToInt(Digit value)
         return 9;
     }
 }
+
+void Cpu::receive(Digit digit) {
+    int value = convertDigitToInt(digit);
+
+    if (this->writeIndex == 0) {
+        this->registerOne->updateValue(value);
+    } else {
+        this->registerTwo->updateValue(value);
+    }
+}
