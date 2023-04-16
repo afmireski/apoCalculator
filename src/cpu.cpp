@@ -78,3 +78,10 @@ Cpu::Cpu() {
 
     this->display = NULL;
 }
+
+Cpu::~Cpu() {
+    delete this->registerOne;
+    delete this->registerTwo;
+    delete this->memoryRegister;
+    this->display = NULL;
+}
