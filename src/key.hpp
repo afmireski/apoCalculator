@@ -7,7 +7,7 @@ class Key : public KeyInterface
     KeyboardInterface *keyboard;
 
 public:
-    Key(char const *symbol, KeyboardInterface *keyboard);
+    Key(char const *symbol);
 
     ~Key();
 
@@ -28,8 +28,7 @@ class KeyDigit : public KeyDigitInterface
     KeyboardInterface *keyboard;
 
 public:
-    KeyDigit(char const *symbol, Digit digit, KeyboardInterface *keyboard);
-
+    KeyDigit(char const *symbol, Digit digit);
     ~KeyDigit();
 
     void press();
@@ -50,7 +49,7 @@ class KeyOperation : public KeyOperationInterface
     KeyboardInterface *keyboard;
 
 public:
-    KeyOperation(char const *symbol, Operation operation, KeyboardInterface *keyboard);
+    KeyOperation(char const *symbol, Operation operation);
 
     ~KeyOperation();
 
@@ -72,7 +71,7 @@ class KeyControl : public KeyControlInterface
     KeyboardInterface *keyboard;
 
 public:
-    KeyControl(char const *symbol, Control control, KeyboardInterface *keyboard);
+    KeyControl(char const *symbol, Control control);
 
     ~KeyControl();
 
