@@ -90,6 +90,7 @@ public:
 #define CpuH
 class CpuInterface
 {
+    virtual int convertDigitToInt(Digit) = 0;
 public:
     virtual void receive(Digit) = 0;
     virtual void receive(Operation) = 0;

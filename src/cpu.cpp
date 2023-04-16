@@ -69,7 +69,8 @@ void Register::reset()
 }
 
 // -- CPU --
-Cpu::Cpu() {
+Cpu::Cpu()
+{
     this->registerOne = new Register();
     this->registerTwo = new Register();
     this->memoryRegister = new Register();
@@ -79,9 +80,37 @@ Cpu::Cpu() {
     this->display = NULL;
 }
 
-Cpu::~Cpu() {
+Cpu::~Cpu()
+{
     delete this->registerOne;
     delete this->registerTwo;
     delete this->memoryRegister;
     this->display = NULL;
+}
+
+int Cpu::convertDigitToInt(Digit value)
+{
+    switch (value)
+    {
+    case ZERO:
+        return 0;
+    case ONE:
+        return 1;
+    case TWO:
+        return 2;
+    case THREE:
+        return 3;
+    case FOUR:
+        return 4;
+    case FIVE:
+        return 5;
+    case SIX:
+        return 6;
+    case SEVEN:
+        return 7;
+    case EIGHT:
+        return 8;
+    case NINE:
+        return 9;
+    }
 }

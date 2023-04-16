@@ -6,7 +6,7 @@ class Register : public RegisterInterface
     float decimalValue;
     bool hasSeparator;
     Signal signal;
-    
+
     unsigned char bitLen;
 
 public:
@@ -33,13 +33,15 @@ public:
 
 class Cpu : public CpuInterface
 {
-    Register* registerOne;
-    Register* registerTwo;
-    Register* memoryRegister;
+    Register *registerOne;
+    Register *registerTwo;
+    Register *memoryRegister;
     Operation operation;
     unsigned char writeIndex;
 
     DisplayInterface *display;
+
+    int convertDigitToInt(Digit);
 
 public:
     Cpu();
