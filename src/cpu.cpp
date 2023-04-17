@@ -40,12 +40,14 @@ float Register::getDecimalValue()
     return value;
 }
 
-void Register::setIntValue(int value) {
+void Register::setIntValue(int value)
+{
     this->intValue = value;
     countBits();
 }
 
-void Register::setDecimalValue(float value) {
+void Register::setDecimalValue(float value)
+{
     value = value - this->getIntValue();
 
     while (value < 0.0)
@@ -94,15 +96,18 @@ void Register::reset()
     this->bitLen = 1;
 }
 
-void Register::countBits() {
+void Register::countBits()
+{
     this->bitLen = 1;
     float intValue = this->getIntValue();
-    if (intValue > 0) {
+    if (intValue > 0)
+    {
         this->bitLen = floor(log10f(intValue) + 1);
     }
 
     float decimalValue = this->getDecimalValue();
-    if (decimalValue > 0) {
+    if (decimalValue > 0)
+    {
         this->bitLen += floor(log10f(intValue) + 1);
     }
 }
@@ -168,7 +173,7 @@ void Cpu::receive(Digit digit)
     }
 }
 
-void Cpu::receive(Operation operation)
+void Cpu::calculate(Operation operation)
 {
     float valueOne = this->registerOne->getValue();
     float valueTwo = this->registerTwo->getValue();
@@ -201,10 +206,58 @@ void Cpu::receive(Operation operation)
 
     registerOne->setIntValue(response);
     registerOne->setDecimalValue(response);
-    if (response < 0) {
+    if (response < 0)
+    {
         registerOne->setSignal();
-    } else {
+    }
+    else
+    {
         registerOne->setSignal(POSITIVE);
     }
+}
 
+void Cpu::receive(Operation operation)
+{
+    this->calculate(operation);
+    this->operation = operation;
+}
+
+void Cpu::receive(Control control)
+{
+    switch (control)
+    {
+    case DECIMAL_SEPARATOR:
+        if (writeIndex == 0)
+        {
+            registerOne->setDecimalSeparator(true);
+        }
+        else
+        {
+            registerTwo->setDecimalSeparator(true);
+        }
+        break;
+    case OFF:
+        registerOne->reset();
+        registerTwo->reset();
+        this->operation = SUM;
+        this->writeIndex = 0;
+        break;
+    case EQUAL:
+        this->calculate(this->operation);
+        break;
+    case CE:
+        if (this->writeIndex == 0)
+        {
+            this->registerOne->reset();
+        }
+        else
+        {
+            this->registerTwo->reset();
+        }
+        this->operation = SUM;
+        break;
+    default:
+        // Lançar exceção
+        break;
+    }
 }

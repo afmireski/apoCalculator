@@ -100,6 +100,8 @@ class CpuInterface
 {
     virtual int convertDigitToInt(Digit) = 0;
 
+    virtual void calculate(Operation) = 0;
+
 public:
     virtual void receive(Digit) = 0;
     virtual void receive(Operation) = 0;

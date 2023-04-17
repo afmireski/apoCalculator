@@ -51,6 +51,8 @@ class Cpu : public CpuInterface
 
     int convertDigitToInt(Digit);
 
+    void calculate(Operation);
+
 public:
     Cpu();
 
