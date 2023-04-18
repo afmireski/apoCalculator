@@ -261,3 +261,8 @@ void Cpu::receive(Control control)
         break;
     }
 }
+
+void Cpu::setDisplay(DisplayInterface *display)
+{
+    this->display = display;
+}
