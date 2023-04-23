@@ -241,6 +241,7 @@ void Cpu::receive(Control control)
         {
             registerTwo->setDecimalSeparator(true);
         }
+        this->display->showDecimalSeparator();
         break;
     case OFF:
         registerOne->reset();
