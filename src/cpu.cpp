@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <bits/stdc++.h>
+using namespace std;
 
 // -- Register --
 
@@ -218,6 +219,7 @@ void Cpu::calculate(Operation operation)
     {
         registerOne->setSignal(POSITIVE);
     }
+    this->showResponseOnDisplay(response);
 }
 
 void Cpu::receive(Operation operation)
@@ -274,4 +276,59 @@ void Cpu::receive(Control control)
 void Cpu::setDisplay(DisplayInterface *display)
 {
     this->display = display;
+}
+
+void Cpu::showResponseOnDisplay(float value)
+{
+    if (this->display != NULL)
+    {
+        this->display->clear();
+        stringstream stream;
+        stream << value;
+        string convertValue = stream.str();
+        for (int i = 0; convertValue[i] != '\0'; i++)
+        {
+            switch (convertValue[i])
+            {
+            case '0':
+                this->display->show(ZERO);
+                break;
+            case '1':
+                this->display->show(ONE);
+                break;
+            case '2':
+                this->display->show(TWO);
+                break;
+            case '3':
+                this->display->show(THREE);
+                break;
+            case '4':
+                this->display->show(FOUR);
+                break;
+            case '5':
+                this->display->show(FIVE);
+                break;
+            case '6':
+                this->display->show(SIX);
+                break;
+            case '7':
+                this->display->show(SEVEN);
+                break;
+            case '8':
+                this->display->show(EIGHT);
+                break;
+            case '9':
+                this->display->show(NINE);
+                break;
+            case '.':
+                this->display->showDecimalSeparator();
+                break;
+            case '-':
+                this->display->showSignal();
+                break;
+            default:
+                // Lançar uma exceção
+            }
+        }
+    }
 }
