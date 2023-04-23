@@ -59,6 +59,8 @@ class DisplayInterface
 {
 public:
     virtual void show(Digit) = 0;
+    virtual void showDecimalSeparator() = 0;
+    virtual void showSignal() = 0;
     virtual void clear() = 0;
 };
 #endif
@@ -100,8 +102,6 @@ class CpuInterface
 {
     virtual int convertDigitToInt(Digit) = 0;
     
-    virtual Digit* convertFloatToDigits(float) = 0;
-
     virtual void showResponseOnDisplay(float) = 0;
 
     virtual void calculate(Operation) = 0;

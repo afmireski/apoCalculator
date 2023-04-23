@@ -51,8 +51,6 @@ class Cpu : public CpuInterface
 
     int convertDigitToInt(Digit);
 
-    Digit* convertFloatToDigits(float);
-
     void showResponseOnDisplay(float);
 
     void calculate(Operation);

@@ -1,6 +1,7 @@
 #include "cpu.hpp"
 #include <cstdlib>
 #include <cmath>
+#include <bits/stdc++.h>
 
 // -- Register --
 
