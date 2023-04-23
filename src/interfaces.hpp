@@ -99,6 +99,10 @@ public:
 class CpuInterface
 {
     virtual int convertDigitToInt(Digit) = 0;
+    
+    virtual Digit* convertFloatToDigits(float) = 0;
+
+    virtual void showResponseOnDisplay(float) = 0;
 
     virtual void calculate(Operation) = 0;
 

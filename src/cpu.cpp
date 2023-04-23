@@ -161,6 +161,9 @@ int Cpu::convertDigitToInt(Digit value)
 
 void Cpu::receive(Digit digit)
 {
+    if (this->display != NULL)
+        this->display->show(digit);
+
     int value = convertDigitToInt(digit);
 
     if (this->writeIndex == 0)
@@ -255,6 +258,11 @@ void Cpu::receive(Control control)
             this->registerTwo->reset();
         }
         this->operation = SUM;
+        if (this->display != NULL)
+        {
+            this->display->clear();
+            this->display->show(ZERO);
+        }
         break;
     default:
         // Lançar exceção
