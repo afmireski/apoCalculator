@@ -227,7 +227,7 @@ void Cpu::calculate(Operation operation)
 
 void Cpu::receive(Operation operation)
 {
-    this->calculate(operation);
+    this->calculate(this->operation);
     this->operation = operation;
 }
 
@@ -280,6 +280,8 @@ void Cpu::receive(Control control)
 void Cpu::setDisplay(DisplayInterface *display)
 {
     this->display = display;
+    this->display->show(ZERO);
+    this->display->clear();
 }
 
 void Cpu::showResponseOnDisplay(float value)
@@ -335,5 +337,6 @@ void Cpu::showResponseOnDisplay(float value)
                 break;
             }
         }
+        this->display->clear();
     }
 }

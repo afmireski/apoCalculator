@@ -54,5 +54,5 @@ void Display::showSignal() {
 }
 
 void Display::clear() {
-    cout << "\n0";
+    cout << "\n";
 }
