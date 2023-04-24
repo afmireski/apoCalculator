@@ -200,7 +200,7 @@ void Cpu::calculate(Operation operation)
         break;
     case RAD:
         // Exceção se for negativo
-        response = sqrtf(registerOne->getValue());
+        response = sqrtf(this->writeIndex == 0 ? valueOne : valueTwo);
         break;
     default:
         // throw error
