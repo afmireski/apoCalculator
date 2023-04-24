@@ -158,6 +158,8 @@ int Cpu::convertDigitToInt(Digit value)
         return 8;
     case NINE:
         return 9;
+    default:
+        return -1;
     }
 }
 
@@ -204,6 +206,7 @@ void Cpu::calculate(Operation operation)
         break;
     default:
         // throw error
+        break;
     }
     registerOne->reset();
     registerTwo->reset();
@@ -329,6 +332,7 @@ void Cpu::showResponseOnDisplay(float value)
                 break;
             default:
                 // Lançar uma exceção
+                break;
             }
         }
     }

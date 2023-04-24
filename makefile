@@ -5,7 +5,7 @@ calculator:
 	g++ -c src/cpu.cpp -o cpu.o -g
 	g++ -c src/display.cpp -o display.o -g
 	g++ -c src/calculator.cpp -o calculator.o -g
-	g++ src/main.cpp *.o -o ./bin/main
+	g++ src/main.cpp *.o -o ./bin/main -g
 
 clean:
 	rm *.o
