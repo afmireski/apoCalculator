@@ -33,8 +33,6 @@ public:
 
     void press();
 
-    char const *getSymbol();
-
     Digit getDigit();
 
     void setKeyboard(KeyboardInterface*);
@@ -55,8 +53,6 @@ public:
 
     void press();
 
-    char const *getSymbol();
-
     Operation getOperation();
 
     void setKeyboard(KeyboardInterface*);
@@ -76,8 +72,6 @@ public:
     ~KeyControl();
 
     void press();
-
-    char const *getSymbol();
 
     Control getControl();
     

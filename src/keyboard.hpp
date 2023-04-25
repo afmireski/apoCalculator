@@ -2,12 +2,12 @@
 
 class Keyboard : public KeyboardInterface
 {
-    KeyInterface *keys;
+    KeyInterface **keys;
 
     CpuInterface* cpu;
 
 public:
-    Keyboard();
+    Keyboard(KeyInterface **keys, CpuInterface* cpu);
 
     ~Keyboard();
 
@@ -19,6 +19,6 @@ public:
     KeyInterface *getKey(Operation);
     KeyInterface *getKey(Control);
 
-    void addKey(KeyInterface *);
+    void addKey(KeyInterface **);
     void setCpu(CpuInterface *);
 };
