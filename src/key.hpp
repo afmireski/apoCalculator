@@ -7,7 +7,7 @@ class Key : public KeyInterface
     KeyboardInterface *keyboard;
 
 public:
-    Key(char const *symbol,KeyboardInterface *keyboard);
+    Key(char const *symbol);
 
     ~Key();
 

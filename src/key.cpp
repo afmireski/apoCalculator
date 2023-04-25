@@ -1,7 +1,7 @@
 #include "key.hpp"
 #include <stddef.h>
 
-Key::Key(char const *symbol,KeyboardInterface *keyboard)
+Key::Key(char const *symbol)
 {
     this->symbol = symbol;
 };
