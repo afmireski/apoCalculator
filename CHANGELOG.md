@@ -1,4 +1,5 @@
 # ADD
+    #11 - Implement `key.cpp`
     #13 - Implement `display.cpp`
     #8 - Refactor project structure
     #3 - `calculator.cpp` implemented;
