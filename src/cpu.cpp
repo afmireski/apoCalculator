@@ -36,8 +36,8 @@ float Register::getDecimalValue()
 {
     float value = this->decimalValue;
 
-    while (value > 0.0)
-        value *= 0.1;
+    while (((int)value/1) > 0)
+        value /= 10;
 
     return value;
 }
