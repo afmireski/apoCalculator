@@ -45,6 +45,14 @@ void Display::show(Digit digit) {
     }
 }
 
+void Display::showDecimalSeparator() {
+    cout << ".";
+}
+
+void Display::showSignal() {
+    cout << "-";
+}
+
 void Display::clear() {
-    cout << "\n0";
+    cout << "\n";
 }

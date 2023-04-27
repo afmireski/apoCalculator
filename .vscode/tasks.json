@@ -1,25 +1,14 @@
 {
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "C/C++: g++ arquivo de build ativo",
-            "command": "/usr/bin/g++",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${fileDirname}/main.cpp",
-                "${fileDirname}/calculator.o",
-                "-o",
-                "${fileDirname}/bin/main"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build",
-            "detail": "Tarefa gerada pelo Depurador."
+            "type": "shell",
+            "label": "calculator",
+            "command": "make calculator",            
+        },
+        {
+            "type": "shell",
+            "label": "tests",
+            "command": "make test",            
         }
     ],
     "version": "2.0.0"

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.h": "c",
+        "*.c": "c",
         "*.tcc": "cpp",
         "exception": "cpp",
         "memory_resource": "cpp",
@@ -11,6 +12,7 @@
         "sstream": "cpp",
         "stop_token": "cpp",
         "streambuf": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "cmath": "cpp"
     }
 }

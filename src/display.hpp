@@ -9,5 +9,9 @@ public:
 
     void show(Digit);
 
+    void showDecimalSeparator();
+
+    void showSignal();
+
     void clear();
 };
