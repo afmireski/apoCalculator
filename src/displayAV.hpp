@@ -11,7 +11,7 @@ public:
 
     void addDecimalSeparator();
 
-    void setSignal();
+    void setSignal(Signal);
 
     void clear();
 };

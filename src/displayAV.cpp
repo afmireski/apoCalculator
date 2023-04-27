@@ -7,7 +7,7 @@ DisplayAndreVictor::DisplayAndreVictor() {};
 
 DisplayAndreVictor::~DisplayAndreVictor() {};
 
-void DisplayAndreVictor::show(Digit digit) {
+void DisplayAndreVictor::add(Digit digit) {
     switch (digit)
     {
     case ZERO:
@@ -45,12 +45,12 @@ void DisplayAndreVictor::show(Digit digit) {
     }
 }
 
-void DisplayAndreVictor::showDecimalSeparator() {
+void DisplayAndreVictor::addDecimalSeparator() {
     cout << ".";
 }
 
-void DisplayAndreVictor::showSignal() {
-    cout << "-";
+void DisplayAndreVictor::setSignal(Signal signal) {
+    if (signal == NEGATIVE) cout << "-";
 }
 
 void DisplayAndreVictor::clear() {
