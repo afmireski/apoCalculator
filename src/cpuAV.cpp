@@ -1,5 +1,4 @@
 #include "cpuAV.hpp"
-#include "register.hpp"
 #include <cstdlib>
 #include <cmath>
 #include <sstream>
