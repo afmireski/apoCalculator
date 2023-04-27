@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <sstream>
 using namespace std;
 
 #ifndef OperationH

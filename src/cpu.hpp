@@ -1,5 +1,5 @@
 #include "interfaces.hpp"
-#include <bits/stdc++.h>
+#include <sstream>
 using namespace std;
 
 class Register : public RegisterInterface

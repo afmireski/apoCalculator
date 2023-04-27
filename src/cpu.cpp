@@ -1,7 +1,7 @@
 #include "cpu.hpp"
 #include <cstdlib>
 #include <cmath>
-#include <bits/stdc++.h>
+#include <sstream>
 using namespace std;
 
 // -- Register --
