@@ -1,13 +1,13 @@
 #include "../src/display.hpp"
-#include "../src/key.hpp"
-#include "../src/keyboard.hpp"
-#include "../src/cpu.hpp"
+#include "../src/keyAV.hpp"
+#include "../src/keyboardAV.hpp"
+#include "../src/cpuAV.hpp"
 #include "../src/calculator.hpp"
 #include "iostream"
 
 using namespace std;
 
-void sumTest(Cpu* cpu) {
+void sumTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Soma ---\n";
     cout << "543 + 856.962 = 1399.962\n\n";
 
@@ -30,7 +30,7 @@ void sumTest(Cpu* cpu) {
     cout << "--- Teste Soma ---\n";
 }
 
-void subTest(Cpu* cpu) {
+void subTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Subtração ---\n";
     cout << "9123.56 - 10000.124 = -876.564\n\n";
 
@@ -59,7 +59,7 @@ void subTest(Cpu* cpu) {
     cout << "--- Subtração ---\n";
 }
 
-void mltTest(Cpu* cpu) {
+void mltTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Multiplicação ---\n";
     cout << "56.1 * 22.09 = 1239,249\n\n";
 
@@ -81,7 +81,7 @@ void mltTest(Cpu* cpu) {
     cout << "--- Teste Multiplicação ---\n";
 }
 
-void divTest(Cpu* cpu) {
+void divTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Divisão ---\n";
     cout << "37 / 42.4 = 0,87264151\n\n";
 
@@ -100,7 +100,7 @@ void divTest(Cpu* cpu) {
     cout << "--- Teste Divisão ---\n";
 }
 
-void radTest(Cpu* cpu) {
+void radTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Raiz ---\n";
     cout << "5 + \n";
     cout << "sqrt(37) = 6,0827625 \n\n";
@@ -120,8 +120,8 @@ void radTest(Cpu* cpu) {
 
 int main()
 {
-    Cpu *cpu = new Cpu();
-    Display* display = new Display();
+    CpuAndreVictor *cpu = new CpuAndreVictor();
+    DisplayAndreVictor* display = new DisplayAndreVictor();
 
     cpu->setDisplay(display);
 

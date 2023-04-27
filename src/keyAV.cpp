@@ -1,21 +1,21 @@
-#include "key.hpp"
+#include "keyAV.hpp"
 #include <stddef.h>
 
-Key::Key(char const *symbol)
+KeyAndreVictor::KeyAndreVictor(char const *symbol)
 {
     this->symbol = symbol;
 };
 
-Key::~Key(){};
+KeyAndreVictor::~KeyAndreVictor(){};
 
-void Key::press(){};
+void KeyAndreVictor::press(){};
 
-char const *Key::getSymbol()
+char const *KeyAndreVictor::getSymbol()
 {
     return this->symbol;
 };
 
-void Key::setKeyboard(KeyboardInterface *keyboard)
+void KeyAndreVictor::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };
@@ -40,7 +40,7 @@ KeyDigit::~KeyDigit(){};
     return this->digit;
  }
 
-void KeyDigit::setKeyboard(KeyboardInterface *keyboard)
+void KeyDigit::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };
@@ -69,7 +69,7 @@ KeyOperation::~KeyOperation(){};
  }
 
 
-void KeyOperation::setKeyboard(KeyboardInterface *keyboard)
+void KeyOperation::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };
@@ -97,7 +97,7 @@ KeyControl::~KeyControl(){};
  }
 
 
-void KeyControl::setKeyboard(KeyboardInterface *keyboard)
+void KeyControl::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };

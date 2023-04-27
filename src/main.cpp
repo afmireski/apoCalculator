@@ -1,14 +1,14 @@
-#include "display.hpp"
-#include "key.hpp"
-#include "keyboard.hpp"
-#include "cpu.hpp"
+#include "displayAV.hpp"
+#include "keyAV.hpp"
+#include "keyboardAV.hpp"
+#include "cpuAV.hpp"
 #include "calculator.hpp"
 #include "iostream"
 
 int main(int argc, char const *argv[])
 {    
-    Cpu *cpu = new Cpu();
-    Display* display = new Display();
+    CpuAndreVictor *cpu = new CpuAndreVictor();
+    DisplayAndreVictor* display = new DisplayAndreVictor();
 
     cpu->setDisplay(display);
 
@@ -16,14 +16,14 @@ int main(int argc, char const *argv[])
     cpu->receive(THREE);
     cpu->receive(FOUR); // 234
 
-    cpu->receive(SUB); // +
+    cpu->receive(SUBTRACTION); // +
 
     cpu->receive(FOUR);
     cpu->receive(DECIMAL_SEPARATOR);
     cpu->receive(FIVE);
     cpu->receive(THREE); //4.53
 
-    cpu->receive(MLT); // *
+    cpu->receive(MULTIPLICATION); // *
 
     cpu->receive(TWO); // 2
 
