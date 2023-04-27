@@ -2,13 +2,13 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Run Make",
+            "label": "calculator",
             "command": "make calculator",            
         },
         {
             "type": "shell",
-            "label": "Run Tests",
-            "command": "make calculator",            
+            "label": "tests",
+            "command": "make test",            
         }
     ],
     "version": "2.0.0"

@@ -125,11 +125,11 @@ int main()
 
     cpu->setDisplay(display);
 
-    // sumTest(cpu);
+    sumTest(cpu);
     subTest(cpu);
-    // mltTest(cpu);
-    // divTest(cpu);
-    // radTest(cpu);
+    mltTest(cpu);
+    divTest(cpu);
+    radTest(cpu);
 
     delete cpu;
     delete display;

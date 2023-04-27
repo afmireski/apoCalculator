@@ -1,4 +1,6 @@
 #include "interfaces.hpp"
+#include <bits/stdc++.h>
+using namespace std;
 
 class Register : public RegisterInterface
 {
@@ -22,9 +24,7 @@ public:
 
     void updateValue(int);
 
-    void setIntValue(int);
-
-    void setDecimalValue(float);
+    void setValue(string);
 
     float getValue();
 
@@ -51,7 +51,7 @@ class Cpu : public CpuInterface
 
     int convertDigitToInt(Digit);
 
-    void showResponseOnDisplay(float);
+    void showResponseOnDisplay(string);
 
     void calculate(Operation);
 

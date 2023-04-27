@@ -23,8 +23,9 @@ void Register::updateValue(int value)
     {
         this->intValue = (this->intValue * 10.0) + value;
     }
-    if (this->bitLen != 1 || value > 0)
-        this->bitLen++;
+    if (this->bitLen == 1 && this->intValue == 0 && this->decimalValue == 0)
+        return;
+    this->bitLen++;
 }
 
 float Register::getIntValue()
@@ -36,26 +37,56 @@ float Register::getDecimalValue()
 {
     float value = this->decimalValue;
 
-    while (((int)value/1) > 0)
+    while (((int)value / 1) > 0)
         value /= 10;
 
     return value;
 }
 
-void Register::setIntValue(int value)
+void Register::setValue(string value)
 {
-    this->intValue = value;
-    countBits();
-}
-
-void Register::setDecimalValue(float value)
-{
-    value = value - this->getIntValue();
-
-    while (value < 0.0)
-        value *= 10;
-    this->decimalValue = value;
-    countBits();
+    for (int i = 0; value[i] != '\0'; i++)
+    {
+        switch (value[i])
+        {
+        case '-':
+            this->setSignal(NEGATIVE);
+            break;
+        case '.':
+            this->setDecimalSeparator(true);
+            break;
+        case '0':
+            this->updateValue(0);
+            break;
+        case '1':
+            this->updateValue(1);
+            break;
+        case '2':
+            this->updateValue(2);
+            break;
+        case '3':
+            this->updateValue(3);
+            break;
+        case '4':
+            this->updateValue(4);
+            break;
+        case '5':
+            this->updateValue(5);
+            break;
+        case '6':
+            this->updateValue(6);
+            break;
+        case '7':
+            this->updateValue(7);
+            break;
+        case '8':
+            this->updateValue(8);
+            break;
+        case '9':
+            this->updateValue(9);
+            break;
+        }
+    }
 }
 
 float Register::getValue()
@@ -212,23 +243,27 @@ void Cpu::calculate(Operation operation)
     registerTwo->reset();
     this->writeIndex = 1;
 
-    registerOne->setIntValue(response);
-    registerOne->setDecimalValue(response);
-    if (response < 0)
-    {
-        registerOne->setSignal();
-    }
-    else
-    {
-        registerOne->setSignal(POSITIVE);
-    }
-    this->showResponseOnDisplay(response);
+    stringstream stream;
+    stream << response;
+    string convertValue = stream.str();
+
+    registerOne->setValue(convertValue);
+    this->showResponseOnDisplay(convertValue);
 }
 
 void Cpu::receive(Operation operation)
 {
-    this->calculate(this->operation);
-    this->operation = operation;
+    if (operation == RAD)
+    {
+        this->calculate(operation);
+        this->operation = SUM;
+        
+    }
+    else
+    {
+        this->calculate(this->operation);
+        this->operation = operation;
+    }
 }
 
 void Cpu::receive(Control control)
@@ -284,17 +319,14 @@ void Cpu::setDisplay(DisplayInterface *display)
     this->display->clear();
 }
 
-void Cpu::showResponseOnDisplay(float value)
+void Cpu::showResponseOnDisplay(string value)
 {
     if (this->display != NULL)
     {
         this->display->clear();
-        stringstream stream;
-        stream << value;
-        string convertValue = stream.str();
-        for (int i = 0; convertValue[i] != '\0'; i++)
+        for (int i = 0; value[i] != '\0'; i++)
         {
-            switch (convertValue[i])
+            switch (value[i])
             {
             case '0':
                 this->display->show(ZERO);

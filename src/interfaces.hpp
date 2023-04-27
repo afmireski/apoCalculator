@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 #ifndef OperationH
 #define OperationH
 enum Operation
@@ -78,9 +81,7 @@ class RegisterInterface
 public:
     virtual void updateValue(int) = 0;
 
-    virtual void setIntValue(int) = 0;
-
-    virtual void setDecimalValue(float) = 0;
+    virtual void setValue(string) = 0;
 
     virtual float getValue() = 0;
 
@@ -102,7 +103,7 @@ class CpuInterface
 {
     virtual int convertDigitToInt(Digit) = 0;
     
-    virtual void showResponseOnDisplay(float) = 0;
+    virtual void showResponseOnDisplay(string) = 0;
 
     virtual void calculate(Operation) = 0;
 

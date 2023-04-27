@@ -24,7 +24,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Run Make",
+            "preLaunchTask": "calculator",
             "miDebuggerPath": "/usr/bin/gdb"
         },
         {
@@ -50,7 +50,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Run Tests",
+            "preLaunchTask": "tests",
             "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
