@@ -1,5 +1,4 @@
 #include "calculator.hpp"
-#include "register.hpp"
 #include <sstream>
 using namespace std;
 
@@ -41,7 +40,7 @@ class Register : public RegisterInterface
     float getIntValue();
 
     float getDecimalValue();
-    
+
     void countBits();
 
 public:

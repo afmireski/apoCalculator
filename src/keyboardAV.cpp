@@ -16,7 +16,7 @@ void KeyboardAndreVictor::receive(Digit digit) {
     }
 }
 
-void KeyboardAndreVictor::receive(Operation operation) {
+void KeyboardAndreVictor::receive(Operator operation) {
     if (cpu != nullptr) {
         cpu->receive(operation);
     }
@@ -39,10 +39,10 @@ Key* KeyboardAndreVictor::getKey(Digit digit)
     return nullptr;
 }
 
-Key* KeyboardAndreVictor::getKey(Operation operation){
+Key* KeyboardAndreVictor::getKey(Operator operation){
     for (int i = 0; i < sizeof(keys); i++){
-    KeyOperation* keyOperation = dynamic_cast<KeyOperation*>(keys[i]);
-    if (keyOperation && keyOperation->getOperation() == operation){
+    KeyOperator* keyOperator = dynamic_cast<KeyOperator*>(keys[i]);
+    if (keyOperator && keyOperator->getOperator() == operation){
         return keys[i];
         }
     }
@@ -52,7 +52,7 @@ Key* KeyboardAndreVictor::getKey(Operation operation){
 Key* KeyboardAndreVictor::getKey(Control control)
 {
     for (int i = 0; i < sizeof(keys); i++){
-        KeyControl* keyControl = dynamic_cast<KeyControl*>(keys[i]);
+        KeyControlAndreVictor* keyControl = dynamic_cast<KeyControlAndreVictor*>(keys[i]);
         if (keyControl && keyControl->getControl() == control){
             return keys[i];
         }

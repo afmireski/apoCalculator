@@ -1,7 +1,7 @@
 #include "keyAV.hpp"
 #include <stddef.h>
 
-KeyAndreVictor::KeyAndreVictor(char const *symbol)
+KeyAndreVictor::KeyAndreVictor(Symbol symbol)
 {
     this->symbol = symbol;
 };
@@ -10,7 +10,7 @@ KeyAndreVictor::~KeyAndreVictor(){};
 
 void KeyAndreVictor::press(){};
 
-char const *KeyAndreVictor::getSymbol()
+Symbol KeyAndreVictor::getSymbol()
 {
     return this->symbol;
 };
@@ -20,41 +20,41 @@ void KeyAndreVictor::setKeyboard(Keyboard *keyboard)
     this->keyboard = keyboard;
 };
 
-KeyDigit::KeyDigit(char const *symbol, Digit digit){
+KeyDigitAndreVictor::KeyDigitAndreVictor(Symbol symbol, Digit digit){
     this->digit = digit;
     this->symbol = symbol;
 
 };
 
-KeyDigit::~KeyDigit(){};
+KeyDigitAndreVictor::~KeyDigitAndreVictor(){};
 
- void KeyDigit::press(){
+ void KeyDigitAndreVictor::press(){
     if (this->keyboard != NULL)
     {
         this->keyboard->receive(this->digit);
     }
  }
 
- Digit KeyDigit::getDigit(){
+ Digit KeyDigitAndreVictor::getDigit(){
 
     return this->digit;
  }
 
-void KeyDigit::setKeyboard(Keyboard *keyboard)
+void KeyDigitAndreVictor::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };
 
 
-KeyOperation::KeyOperation(char const *symbol, Operation operation){
+KeyOperatorAndreVictor::KeyOperatorAndreVictor(Symbol symbol, Operator operation){
     this->operation = operation;
     this->symbol = symbol;
 
 };
 
-KeyOperation::~KeyOperation(){};
+KeyOperatorAndreVictor::~KeyOperatorAndreVictor(){};
 
- void KeyOperation::press(){
+ void KeyOperatorAndreVictor::press(){
 
     if (this->keyboard != NULL)
     {
@@ -63,26 +63,26 @@ KeyOperation::~KeyOperation(){};
 
  }
 
- Operation KeyOperation::getOperation(){
+ Operator KeyOperatorAndreVictor::getOperator(){
 
     return this->operation;
  }
 
 
-void KeyOperation::setKeyboard(Keyboard *keyboard)
+void KeyOperatorAndreVictor::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };
 
-KeyControl::KeyControl(char const *symbol, Control control){
+KeyControlAndreVictor::KeyControlAndreVictor(Symbol symbol, Control control){
     this->control = control;
     this->symbol = symbol;
 
 };
 
-KeyControl::~KeyControl(){};
+KeyControlAndreVictor::~KeyControlAndreVictor(){};
 
- void KeyControl::press(){
+ void KeyControlAndreVictor::press(){
 
     if (this->keyboard != NULL)
     {
@@ -91,13 +91,13 @@ KeyControl::~KeyControl(){};
 
  }
 
- Control KeyControl::getControl(){
+ Control KeyControlAndreVictor::getControl(){
 
     return this->control;
  }
 
 
-void KeyControl::setKeyboard(Keyboard *keyboard)
+void KeyControlAndreVictor::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };

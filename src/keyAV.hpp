@@ -1,35 +1,37 @@
+#pragma once
+
 #include "calculator.hpp"
 
 class KeyAndreVictor : public Key
 {
-    char const *symbol;
+    Symbol symbol;
 
     Keyboard *keyboard;
 
 public:
-    KeyAndreVictor(char const *symbol);
+    KeyAndreVictor(Symbol symbol);
 
     ~KeyAndreVictor();
 
     void press();
 
-    char const *getSymbol();
+    Symbol getSymbol();
 
     void setKeyboard(Keyboard*);
 
 };
 
-class KeyDigit : public KeyDigit
+class KeyDigitAndreVictor : public KeyDigit
 {
     Digit digit;
 
-    char const *symbol;
+    Symbol symbol;
 
     Keyboard *keyboard;
 
 public:
-    KeyDigit(char const *symbol, Digit digit);
-    ~KeyDigit();
+    KeyDigitAndreVictor(Symbol symbol, Digit digit);
+    ~KeyDigitAndreVictor();
 
     void press();
 
@@ -38,38 +40,38 @@ public:
     void setKeyboard(Keyboard*);
 };
 
-class KeyOperation : public KeyOperation
+class KeyOperatorAndreVictor : public KeyOperator
 {
     Operator operation;
 
-    char const *symbol;
+    Symbol symbol;
 
     Keyboard *keyboard;
 
 public:
-    KeyOperation(char const *symbol, Operator operation);
+    KeyOperatorAndreVictor(Symbol symbol, Operator operation);
 
-    ~KeyOperation();
+    ~KeyOperatorAndreVictor();
 
     void press();
 
-    Operator getOperation();
+    Operator getOperator();
 
     void setKeyboard(Keyboard*);
 };
 
-class KeyControl : public KeyControl
+class KeyControlAndreVictor : public KeyControl
 {
     Control control;
 
-    char const *symbol;
+    Symbol symbol;
 
     Keyboard *keyboard;
 
 public:
-    KeyControl(char const *symbol, Control control);
+    KeyControlAndreVictor(Symbol symbol, Control control);
 
-    ~KeyControl();
+    ~KeyControlAndreVictor();
 
     void press();
 
