@@ -1,8 +1,8 @@
-#include "../src/display.hpp"
+#include "../src/displayAV.hpp"
 #include "../src/keyAV.hpp"
 #include "../src/keyboardAV.hpp"
 #include "../src/cpuAV.hpp"
-#include "../src/calculator.hpp"
+#include "../src/calculatorAV.hpp"
 #include "iostream"
 
 using namespace std;
@@ -42,7 +42,7 @@ void subTest(CpuAndreVictor* cpu) {
     cpu->receive(FIVE);
     cpu->receive(SIX);
 
-    cpu->receive(SUB);
+    cpu->receive(SUBTRACTION);
 
     cpu->receive(ONE);
     cpu->receive(ZERO);
@@ -68,7 +68,7 @@ void mltTest(CpuAndreVictor* cpu) {
     cpu->receive(DECIMAL_SEPARATOR);
     cpu->receive(ONE);
 
-    cpu->receive(MLT);
+    cpu->receive(MULTIPLICATION);
 
     cpu->receive(TWO);
     cpu->receive(TWO);
@@ -88,7 +88,7 @@ void divTest(CpuAndreVictor* cpu) {
     cpu->receive(THREE);
     cpu->receive(SEVEN);
 
-    cpu->receive(DIV);
+    cpu->receive(DIVISION);
 
     cpu->receive(FOUR);
     cpu->receive(TWO);
@@ -112,7 +112,7 @@ void radTest(CpuAndreVictor* cpu) {
     cpu->receive(THREE);
     cpu->receive(SEVEN);
 
-    cpu->receive(RAD);
+    cpu->receive(SQUARE_ROOT);
 
     cpu->receive(OFF);
     cout << "--- Teste Raiz ---\n";

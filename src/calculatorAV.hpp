@@ -1,8 +1,8 @@
-#include "calculator.hpp";
+#include "calculator.hpp"
 
 class CalculatorAndreVictor : Calculator
 {
-    DisplayInterface *display;
+    Display *display;
 
     Cpu *cpu;
 
@@ -13,8 +13,8 @@ public:
 
     ~CalculatorAndreVictor();
 
-    DisplayInterface *getDisplay();
-    void setDisplay(DisplayInterface*);
+    Display *getDisplay();
+    void setDisplay(Display*);
 
     Cpu *getCpu();
     void setCpu(Cpu*);
