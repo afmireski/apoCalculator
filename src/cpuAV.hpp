@@ -84,7 +84,7 @@ class CpuAndreVictor : public Cpu
 
     bool isOn();
 
-    bool setOn(bool);
+    void setOn(bool = true);
 
 public:
     CpuAndreVictor();

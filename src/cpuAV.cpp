@@ -198,18 +198,21 @@ int CpuAndreVictor::convertDigitToInt(Digit value)
 
 void CpuAndreVictor::receive(Digit digit)
 {
-    if (this->display != NULL)
-        this->display->add(digit);
-
-    int value = convertDigitToInt(digit);
-
-    if (this->writeIndex == 0)
+    if (this->isOn())
     {
-        this->registerOne->updateValue(value);
-    }
-    else
-    {
-        this->registerTwo->updateValue(value);
+        if (this->display != NULL)
+            this->display->add(digit);
+
+        int value = convertDigitToInt(digit);
+
+        if (this->writeIndex == 0)
+        {
+            this->registerOne->updateValue(value);
+        }
+        else
+        {
+            this->registerTwo->updateValue(value);
+        }
     }
 }
 
@@ -255,15 +258,18 @@ void CpuAndreVictor::calculate(Operator operation)
 
 void CpuAndreVictor::receive(Operator operation)
 {
-    if (operation == SQUARE_ROOT)
+    if (this->isOn())
     {
-        this->calculate(operation);
-        this->operation = SUM;
+        if (operation == SQUARE_ROOT)
+        {
+            this->calculate(operation);
+            this->operation = SUM;
         }
-    else
-    {
-        this->calculate(this->operation);
-        this->operation = operation;
+        else
+        {
+            this->calculate(this->operation);
+            this->operation = operation;
+        }
     }
 }
 
@@ -272,6 +278,9 @@ void CpuAndreVictor::receive(Control control)
     switch (control)
     {
     case DECIMAL_SEPARATOR:
+        if (!this->isOn())
+            break;
+
         if (writeIndex == 0)
         {
             registerOne->setDecimalSeparator(true);
@@ -283,28 +292,44 @@ void CpuAndreVictor::receive(Control control)
         this->display->addDecimalSeparator();
         break;
     case OFF:
+        if (!this->isOn())
+            break;
+
         registerOne->reset();
         registerTwo->reset();
         this->operation = SUM;
         this->writeIndex = 0;
+        this->setOn(false);
         break;
     case EQUAL:
+        if (!this->isOn())
+            break;
+
         this->calculate(this->operation);
         break;
     case ON_CLEAR_ERROR:
-        if (this->writeIndex == 0)
+        if (!this->isOn())
         {
-            this->registerOne->reset();
+            this->setOn();
+            this->display->add(ZERO);
+            this->display->clear();
         }
         else
         {
-            this->registerTwo->reset();
-        }
-        this->operation = SUM;
-        if (this->display != NULL)
-        {
-            this->display->clear();
-            this->display->add(ZERO);
+            if (this->writeIndex == 0)
+            {
+                this->registerOne->reset();
+            }
+            else
+            {
+                this->registerTwo->reset();
+            }
+            this->operation = SUM;
+            if (this->display != NULL)
+            {
+                this->display->clear();
+                this->display->add(ZERO);
+            }
         }
         break;
     default:
@@ -316,8 +341,6 @@ void CpuAndreVictor::receive(Control control)
 void CpuAndreVictor::setDisplay(Display *display)
 {
     this->display = display;
-    this->display->add(ZERO);
-    this->display->clear();
 }
 
 void CpuAndreVictor::showResponseOnDisplay(string value)
@@ -374,10 +397,12 @@ void CpuAndreVictor::showResponseOnDisplay(string value)
     }
 }
 
-bool CpuAndreVictor::isOn() {
+bool CpuAndreVictor::isOn()
+{
     return this->on;
 }
 
-bool CpuAndreVictor::setOn(bool value = true) {
+void CpuAndreVictor::setOn(bool value)
+{
     this->on = value;
 }
