@@ -10,6 +10,7 @@ using namespace std;
 void sumTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Soma ---\n";
     cout << "543 + 856.962 = 1399.962\n\n";
+    cpu->receive(ON_CLEAR_ERROR);
 
     cpu->receive(FIVE);
     cpu->receive(FOUR);
@@ -33,6 +34,7 @@ void sumTest(CpuAndreVictor* cpu) {
 void subTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Subtração ---\n";
     cout << "9123.56 - 10000.124 = -876.564\n\n";
+    cpu->receive(ON_CLEAR_ERROR);
 
     cpu->receive(NINE);
     cpu->receive(ONE);
@@ -62,6 +64,7 @@ void subTest(CpuAndreVictor* cpu) {
 void mltTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Multiplicação ---\n";
     cout << "56.1 * 22.09 = 1239,249\n\n";
+    cpu->receive(ON_CLEAR_ERROR);
 
     cpu->receive(FIVE);
     cpu->receive(SIX);
@@ -84,6 +87,7 @@ void mltTest(CpuAndreVictor* cpu) {
 void divTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Divisão ---\n";
     cout << "37 / 42.4 = 0,87264151\n\n";
+    cpu->receive(ON_CLEAR_ERROR);
 
     cpu->receive(THREE);
     cpu->receive(SEVEN);
@@ -104,6 +108,7 @@ void radTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Raiz ---\n";
     cout << "5 + \n";
     cout << "sqrt(37) = 6,0827625 \n\n";
+    cpu->receive(ON_CLEAR_ERROR);
 
     cpu->receive(FIVE);
 
