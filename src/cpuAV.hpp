@@ -72,6 +72,7 @@ class CpuAndreVictor : public Cpu
     Register *memoryRegister;
     Operator operation;
     unsigned char writeIndex;
+    bool on;
 
     Display *display;
 
@@ -80,6 +81,10 @@ class CpuAndreVictor : public Cpu
     void showResponseOnDisplay(string);
 
     void calculate(Operator);
+
+    bool isOn();
+
+    bool setOn(bool);
 
 public:
     CpuAndreVictor();

@@ -154,6 +154,7 @@ CpuAndreVictor::CpuAndreVictor()
     this->memoryRegister = new Register();
     this->operation = SUM;
     this->writeIndex = 0;
+    this->on = false;
 
     this->display = NULL;
 }
@@ -371,4 +372,12 @@ void CpuAndreVictor::showResponseOnDisplay(string value)
         }
         this->display->clear();
     }
+}
+
+bool CpuAndreVictor::isOn() {
+    return this->on;
+}
+
+bool CpuAndreVictor::setOn(bool value = true) {
+    this->on = value;
 }
