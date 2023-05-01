@@ -1,4 +1,5 @@
 #include "cpuAV.hpp"
+#include "calculatorErrorAV.hpp"
 #include <cstdlib>
 #include <cmath>
 #include <sstream>
@@ -192,7 +193,7 @@ int CpuAndreVictor::convertDigitToInt(Digit value)
     case NINE:
         return 9;
     default:
-        return -1;
+        throw new CalculatorErrorAndreVictor("DIGIT not implemented!!!");
     }
 }
 
@@ -237,11 +238,16 @@ void CpuAndreVictor::calculate(Operator operation)
         response = valueOne / valueTwo;
         break;
     case SQUARE_ROOT:
-        // Exceção se for negativo
-        response = sqrtf(this->writeIndex == 0 ? valueOne : valueTwo);
+        float value = this->writeIndex == 0 ? valueOne : valueTwo;
+
+        if (value < 0)
+        {
+            throw new CalculatorErrorAndreVictor("Negative numbers do not have a square root.!!!");
+        }
+        response = sqrtf(value);
         break;
     default:
-        // throw error
+        throw new CalculatorErrorAndreVictor("Operator not implemented.!!!");
         break;
     }
     registerOne->reset();
@@ -333,7 +339,7 @@ void CpuAndreVictor::receive(Control control)
         }
         break;
     default:
-        // Lançar exceção
+        throw new CalculatorErrorAndreVictor("Control not implemented.!!!");
         break;
     }
 }
