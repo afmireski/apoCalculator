@@ -246,8 +246,29 @@ void CpuAndreVictor::calculate(Operator operation)
         }
         response = sqrtf(value);
         break;
+    case PERCENTAGE:
+        float percentage = valueTwo / 100;
+        switch (this->operation)
+        {
+        case SUM:
+            response = valueOne + (valueOne * percentage);
+            break;
+        case SUBTRACTION:
+            response = valueOne - (valueOne * percentage);
+            break;
+        case MULTIPLICATION:
+            response = valueOne * percentage;
+            break;
+        case DIVISION:
+            response = valueOne / percentage;
+            break;
+        default:
+            throw new CalculatorErrorAndreVictor("This operation does not work with percentage!!!");
+            break;
+        }
+        break;
     default:
-        throw new CalculatorErrorAndreVictor("Operator not implemented.!!!");
+        throw new CalculatorErrorAndreVictor("Operator not implemented!!!");
         break;
     }
     registerOne->reset();
