@@ -16,17 +16,20 @@ Register::~Register() {}
 
 void Register::updateValue(int value)
 {
-    if (this->hasDecimalSeparator())
+    if (this->bitLen < 8)
     {
-        this->decimalValue = (this->decimalValue * 10.0) + value;
+        if (this->hasDecimalSeparator())
+        {
+            this->decimalValue = (this->decimalValue * 10.0) + value;
+        }
+        else
+        {
+            this->intValue = (this->intValue * 10.0) + value;
+        }
+        if (this->bitLen == 1 && this->intValue == 0 && this->decimalValue == 0)
+            return;
+        this->bitLen++;
     }
-    else
-    {
-        this->intValue = (this->intValue * 10.0) + value;
-    }
-    if (this->bitLen == 1 && this->intValue == 0 && this->decimalValue == 0)
-        return;
-    this->bitLen++;
 }
 
 float Register::getIntValue()
@@ -86,6 +89,8 @@ void Register::setValue(string value)
         case '9':
             this->updateValue(9);
             break;
+        default:
+            throw new CalculatorErrorAndreVictor("This symbol cannot be converted!!!");
         }
     }
 }
@@ -292,6 +297,11 @@ void CpuAndreVictor::receive(Operator operation)
             this->calculate(operation);
             this->operation = SUM;
         }
+        else if (operation == PERCENTAGE)
+        {
+            this->calculate(operation);
+            this->operation = SUM;
+        }
         else
         {
             this->calculate(this->operation);
@@ -416,7 +426,7 @@ void CpuAndreVictor::showResponseOnDisplay(string value)
                 this->display->setSignal(NEGATIVE);
                 break;
             default:
-                // Lançar uma exceção
+                throw new CalculatorErrorAndreVictor("This symbol cannot be showed!!!");
                 break;
             }
         }
