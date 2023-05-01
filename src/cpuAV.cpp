@@ -1,4 +1,4 @@
-#include "cpu.hpp"
+#include "cpuAV.hpp"
 #include <cstdlib>
 #include <cmath>
 #include <sstream>
@@ -146,18 +146,20 @@ void Register::countBits()
 }
 
 // -- CPU --
-Cpu::Cpu()
+
+CpuAndreVictor::CpuAndreVictor()
 {
     this->registerOne = new Register();
     this->registerTwo = new Register();
     this->memoryRegister = new Register();
     this->operation = SUM;
     this->writeIndex = 0;
+    this->on = false;
 
     this->display = NULL;
 }
 
-Cpu::~Cpu()
+CpuAndreVictor::~CpuAndreVictor()
 {
     delete this->registerOne;
     delete this->registerTwo;
@@ -165,7 +167,7 @@ Cpu::~Cpu()
     this->display = NULL;
 }
 
-int Cpu::convertDigitToInt(Digit value)
+int CpuAndreVictor::convertDigitToInt(Digit value)
 {
     switch (value)
     {
@@ -194,24 +196,27 @@ int Cpu::convertDigitToInt(Digit value)
     }
 }
 
-void Cpu::receive(Digit digit)
+void CpuAndreVictor::receive(Digit digit)
 {
-    if (this->display != NULL)
-        this->display->show(digit);
-
-    int value = convertDigitToInt(digit);
-
-    if (this->writeIndex == 0)
+    if (this->isOn())
     {
-        this->registerOne->updateValue(value);
-    }
-    else
-    {
-        this->registerTwo->updateValue(value);
+        if (this->display != NULL)
+            this->display->add(digit);
+
+        int value = convertDigitToInt(digit);
+
+        if (this->writeIndex == 0)
+        {
+            this->registerOne->updateValue(value);
+        }
+        else
+        {
+            this->registerTwo->updateValue(value);
+        }
     }
 }
 
-void Cpu::calculate(Operation operation)
+void CpuAndreVictor::calculate(Operator operation)
 {
     float valueOne = this->registerOne->getValue();
     float valueTwo = this->registerTwo->getValue();
@@ -222,16 +227,16 @@ void Cpu::calculate(Operation operation)
     case SUM:
         response = valueOne + valueTwo;
         break;
-    case SUB:
+    case SUBTRACTION:
         response = valueOne - valueTwo;
         break;
-    case MLT:
+    case MULTIPLICATION:
         response = valueOne * valueTwo;
         break;
-    case DIV:
+    case DIVISION:
         response = valueOne / valueTwo;
         break;
-    case RAD:
+    case SQUARE_ROOT:
         // Exceção se for negativo
         response = sqrtf(this->writeIndex == 0 ? valueOne : valueTwo);
         break;
@@ -251,26 +256,31 @@ void Cpu::calculate(Operation operation)
     this->showResponseOnDisplay(convertValue);
 }
 
-void Cpu::receive(Operation operation)
+void CpuAndreVictor::receive(Operator operation)
 {
-    if (operation == RAD)
+    if (this->isOn())
     {
-        this->calculate(operation);
-        this->operation = SUM;
-        
-    }
-    else
-    {
-        this->calculate(this->operation);
-        this->operation = operation;
+        if (operation == SQUARE_ROOT)
+        {
+            this->calculate(operation);
+            this->operation = SUM;
+        }
+        else
+        {
+            this->calculate(this->operation);
+            this->operation = operation;
+        }
     }
 }
 
-void Cpu::receive(Control control)
+void CpuAndreVictor::receive(Control control)
 {
     switch (control)
     {
     case DECIMAL_SEPARATOR:
+        if (!this->isOn())
+            break;
+
         if (writeIndex == 0)
         {
             registerOne->setDecimalSeparator(true);
@@ -279,31 +289,47 @@ void Cpu::receive(Control control)
         {
             registerTwo->setDecimalSeparator(true);
         }
-        this->display->showDecimalSeparator();
+        this->display->addDecimalSeparator();
         break;
     case OFF:
+        if (!this->isOn())
+            break;
+
         registerOne->reset();
         registerTwo->reset();
         this->operation = SUM;
         this->writeIndex = 0;
+        this->setOn(false);
         break;
     case EQUAL:
+        if (!this->isOn())
+            break;
+
         this->calculate(this->operation);
         break;
-    case CE:
-        if (this->writeIndex == 0)
+    case ON_CLEAR_ERROR:
+        if (!this->isOn())
         {
-            this->registerOne->reset();
+            this->setOn();
+            this->display->add(ZERO);
+            this->display->clear();
         }
         else
         {
-            this->registerTwo->reset();
-        }
-        this->operation = SUM;
-        if (this->display != NULL)
-        {
-            this->display->clear();
-            this->display->show(ZERO);
+            if (this->writeIndex == 0)
+            {
+                this->registerOne->reset();
+            }
+            else
+            {
+                this->registerTwo->reset();
+            }
+            this->operation = SUM;
+            if (this->display != NULL)
+            {
+                this->display->clear();
+                this->display->add(ZERO);
+            }
         }
         break;
     default:
@@ -312,14 +338,12 @@ void Cpu::receive(Control control)
     }
 }
 
-void Cpu::setDisplay(DisplayInterface *display)
+void CpuAndreVictor::setDisplay(Display *display)
 {
     this->display = display;
-    this->display->show(ZERO);
-    this->display->clear();
 }
 
-void Cpu::showResponseOnDisplay(string value)
+void CpuAndreVictor::showResponseOnDisplay(string value)
 {
     if (this->display != NULL)
     {
@@ -329,40 +353,40 @@ void Cpu::showResponseOnDisplay(string value)
             switch (value[i])
             {
             case '0':
-                this->display->show(ZERO);
+                this->display->add(ZERO);
                 break;
             case '1':
-                this->display->show(ONE);
+                this->display->add(ONE);
                 break;
             case '2':
-                this->display->show(TWO);
+                this->display->add(TWO);
                 break;
             case '3':
-                this->display->show(THREE);
+                this->display->add(THREE);
                 break;
             case '4':
-                this->display->show(FOUR);
+                this->display->add(FOUR);
                 break;
             case '5':
-                this->display->show(FIVE);
+                this->display->add(FIVE);
                 break;
             case '6':
-                this->display->show(SIX);
+                this->display->add(SIX);
                 break;
             case '7':
-                this->display->show(SEVEN);
+                this->display->add(SEVEN);
                 break;
             case '8':
-                this->display->show(EIGHT);
+                this->display->add(EIGHT);
                 break;
             case '9':
-                this->display->show(NINE);
+                this->display->add(NINE);
                 break;
             case '.':
-                this->display->showDecimalSeparator();
+                this->display->addDecimalSeparator();
                 break;
             case '-':
-                this->display->showSignal();
+                this->display->setSignal(NEGATIVE);
                 break;
             default:
                 // Lançar uma exceção
@@ -371,4 +395,14 @@ void Cpu::showResponseOnDisplay(string value)
         }
         this->display->clear();
     }
+}
+
+bool CpuAndreVictor::isOn()
+{
+    return this->on;
+}
+
+void CpuAndreVictor::setOn(bool value)
+{
+    this->on = value;
 }

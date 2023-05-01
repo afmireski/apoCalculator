@@ -1,34 +1,34 @@
-#include "keyboard.hpp"
-#include "key.hpp"
+#include "keyboardAV.hpp"
+#include "keyAV.hpp"
 
-Keyboard::Keyboard(KeyInterface **keys, CpuInterface* cpu) {
+KeyboardAndreVictor::KeyboardAndreVictor(Key **keys, Cpu* cpu) {
 
     this->keys = keys;
     this->cpu = cpu;
 
 }
 
-Keyboard::~Keyboard(){}
+KeyboardAndreVictor::~KeyboardAndreVictor(){}
 
-void Keyboard::receive(Digit digit) {
+void KeyboardAndreVictor::receive(Digit digit) {
     if (cpu != nullptr) {
         cpu->receive(digit);
     }
 }
 
-void Keyboard::receive(Operation operation) {
+void KeyboardAndreVictor::receive(Operator operation) {
     if (cpu != nullptr) {
         cpu->receive(operation);
     }
 }
 
-void Keyboard::receive(Control control) {
+void KeyboardAndreVictor::receive(Control control) {
     if (cpu != nullptr) {
         cpu->receive(control);
     }
 }
 
-KeyInterface* Keyboard::getKey(Digit digit)
+Key* KeyboardAndreVictor::getKey(Digit digit)
 {
     for (int i = 0; i < sizeof(keys); i++){
         KeyDigit* keyDigit = dynamic_cast<KeyDigit*>(keys[i]);
@@ -39,20 +39,20 @@ KeyInterface* Keyboard::getKey(Digit digit)
     return nullptr;
 }
 
-KeyInterface* Keyboard::getKey(Operation operation){
+Key* KeyboardAndreVictor::getKey(Operator operation){
     for (int i = 0; i < sizeof(keys); i++){
-    KeyOperation* keyOperation = dynamic_cast<KeyOperation*>(keys[i]);
-    if (keyOperation && keyOperation->getOperation() == operation){
+    KeyOperator* keyOperator = dynamic_cast<KeyOperator*>(keys[i]);
+    if (keyOperator && keyOperator->getOperator() == operation){
         return keys[i];
         }
     }
     return nullptr;
 }
 
-KeyInterface* Keyboard::getKey(Control control)
+Key* KeyboardAndreVictor::getKey(Control control)
 {
     for (int i = 0; i < sizeof(keys); i++){
-        KeyControl* keyControl = dynamic_cast<KeyControl*>(keys[i]);
+        KeyControlAndreVictor* keyControl = dynamic_cast<KeyControlAndreVictor*>(keys[i]);
         if (keyControl && keyControl->getControl() == control){
             return keys[i];
         }
@@ -60,12 +60,12 @@ KeyInterface* Keyboard::getKey(Control control)
     return nullptr;
 }
 
-void Keyboard::addKey(KeyInterface** key)
+void KeyboardAndreVictor::addKey(Key** key)
 {
     this->keys = key;
 }
 
 // Define a CPU que receberá os comandos do teclado
-void Keyboard::setCpu(CpuInterface *cpu) {
+void KeyboardAndreVictor::setCpu(Cpu *cpu) {
     this->cpu = cpu;
 }

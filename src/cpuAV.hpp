@@ -1,6 +1,32 @@
-#include "interfaces.hpp"
+#include "calculator.hpp"
 #include <sstream>
 using namespace std;
+
+class RegisterInterface
+{
+    virtual float getIntValue() = 0;
+
+    virtual float getDecimalValue() = 0;
+
+    virtual void countBits() = 0;
+
+public:
+    virtual void updateValue(int) = 0;
+
+    virtual void setValue(string) = 0;
+
+    virtual float getValue() = 0;
+
+    virtual void setDecimalSeparator(bool) = 0;
+
+    virtual bool hasDecimalSeparator() = 0;
+
+    virtual Signal getSignal() = 0;
+
+    virtual void setSignal(Signal) = 0;
+
+    virtual void reset() = 0;
+};
 
 class Register : public RegisterInterface
 {
@@ -14,7 +40,7 @@ class Register : public RegisterInterface
     float getIntValue();
 
     float getDecimalValue();
-    
+
     void countBits();
 
 public:
@@ -39,30 +65,35 @@ public:
     void reset();
 };
 
-class Cpu : public CpuInterface
+class CpuAndreVictor : public Cpu
 {
     Register *registerOne;
     Register *registerTwo;
     Register *memoryRegister;
-    Operation operation;
+    Operator operation;
     unsigned char writeIndex;
+    bool on;
 
-    DisplayInterface *display;
+    Display *display;
 
     int convertDigitToInt(Digit);
 
     void showResponseOnDisplay(string);
 
-    void calculate(Operation);
+    void calculate(Operator);
+
+    bool isOn();
+
+    void setOn(bool = true);
 
 public:
-    Cpu();
+    CpuAndreVictor();
 
-    ~Cpu();
+    ~CpuAndreVictor();
 
     void receive(Digit);
-    void receive(Operation);
+    void receive(Operator);
     void receive(Control);
 
-    void setDisplay(DisplayInterface *);
+    void setDisplay(Display *);
 };

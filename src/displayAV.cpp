@@ -1,13 +1,13 @@
-#include "display.hpp"
+#include "displayAV.hpp"
 #include <iostream>
 
 using namespace std;
 
-Display::Display() {};
+DisplayAndreVictor::DisplayAndreVictor() {};
 
-Display::~Display() {};
+DisplayAndreVictor::~DisplayAndreVictor() {};
 
-void Display::show(Digit digit) {
+void DisplayAndreVictor::add(Digit digit) {
     switch (digit)
     {
     case ZERO:
@@ -45,14 +45,14 @@ void Display::show(Digit digit) {
     }
 }
 
-void Display::showDecimalSeparator() {
+void DisplayAndreVictor::addDecimalSeparator() {
     cout << ".";
 }
 
-void Display::showSignal() {
-    cout << "-";
+void DisplayAndreVictor::setSignal(Signal signal) {
+    if (signal == NEGATIVE) cout << "-";
 }
 
-void Display::clear() {
+void DisplayAndreVictor::clear() {
     cout << "\n";
 }
