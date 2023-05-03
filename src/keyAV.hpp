@@ -10,6 +10,7 @@ class KeyDigitAndreVictor : public KeyDigit
 
 public:
     KeyDigitAndreVictor(Symbol, Digit);
+    ~KeyDigitAndreVictor();
     void press();
     Symbol getSymbol();
     void setKeyboard(Keyboard *);
@@ -24,6 +25,7 @@ class KeyControlAndreVictor : public KeyControl
 
 public:
     KeyControlAndreVictor(Symbol, Control);
+    ~KeyControlAndreVictor();
     void press();
     Symbol getSymbol();
     void setKeyboard(Keyboard *);
@@ -38,6 +40,7 @@ class KeyOperatorAndreVictor : public KeyOperator
 
 public:
     KeyOperatorAndreVictor(Symbol, Operator);
+    ~KeyOperatorAndreVictor();
     void press();
     Symbol getSymbol();
     void setKeyboard(Keyboard *);

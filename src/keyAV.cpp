@@ -22,6 +22,11 @@ Digit KeyDigitAndreVictor::getDigit()
     return this->digit;
 }
 
+Symbol KeyDigitAndreVictor::getSymbol()
+{
+    return this->symbol;
+}
+
 void KeyDigitAndreVictor::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
@@ -53,6 +58,11 @@ void KeyOperatorAndreVictor::setKeyboard(Keyboard *keyboard)
     this->keyboard = keyboard;
 };
 
+Symbol KeyOperatorAndreVictor::getSymbol()
+{
+    return this->symbol;
+}
+
 KeyControlAndreVictor::KeyControlAndreVictor(Symbol symbol, Control control)
 {
     this->control = control;
@@ -78,3 +88,8 @@ void KeyControlAndreVictor::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };
+
+Symbol KeyControlAndreVictor::getSymbol()
+{
+    return this->symbol;
+}

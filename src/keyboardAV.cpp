@@ -70,6 +70,7 @@ void KeyboardAndreVictor::add(Key *key)
     {
         this->keys.push_back(key);
         key->setKeyboard(this);
+        this->keysCount++;
     }
 }
 
