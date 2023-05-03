@@ -424,29 +424,29 @@ float CpuAndreVictor::getCurrentValue(){
     )
 }
 
-void CpuAndreVictor::MPlus()
+void CpuAndreVictor::mPlus()
 {
     float value = getCurrentValue();
     float memoryValue = this->memoryRegister->getValue();
     this->memoryRegister->setValue(to_string(value + memoryValue));
 }
 
-void CpuAndreVictor::MMinus()
+void CpuAndreVictor::mMinus()
 {
     float value = getCurrentValue();
     float memoryValue = this->memoryRegister->getValue();
     this->memoryRegister->setValue(to_string(memoryValue - value));
 }
 
-void CpuAndreVictor::MRC()
+void CpuAndreVictor::mrc()
 {
     if (!this->memoryRegister->getIsDoublePress())
     {
         float response = this->memoryRegister->getValue();
         stringstream stream;
         stream << response;
-        string convertValue = stream.str();
-        showResponseOnDisplay(());
+        string convertedValue = stream.str();
+        this->showResponseOnDisplay(convertedValue);
         this->memoryRegister->setIsDoublePress(true);
     }
     else{
