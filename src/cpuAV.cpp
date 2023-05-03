@@ -121,15 +121,6 @@ Signal Register::getSignal()
     return this->signal;
 }
 
-bool Register::getIsDoublePress(){
-    return this->isDoublePress;
-}
-
-void Register::setIsDoublePress(bool value)
-{
-    this->isDoublePress = value;
-}
-
 void Register::setSignal(Signal value = NEGATIVE)
 {
     this->signal = value;
@@ -142,7 +133,6 @@ void Register::reset()
     this->hasSeparator = false;
     this->signal = POSITIVE;
     this->bitLen = 1;
-    this->isDoublePress = false;
 }
 
 void Register::countBits()
@@ -216,6 +206,8 @@ void CpuAndreVictor::receive(Digit digit)
 {
     if (this->isOn())
     {
+        if (this->getIsDoubleMemory())
+            this->setIsDoubleMemory(false);
         if (this->display != NULL)
             this->display->add(digit);
 
@@ -316,6 +308,8 @@ void CpuAndreVictor::receive(Operator operation)
 {
     if (this->isOn())
     {
+        if (this->getIsDoubleMemory())
+            this->setIsDoubleMemory(false);
         if (operation == SQUARE_ROOT)
         {
             this->calculate(operation);
@@ -336,6 +330,8 @@ void CpuAndreVictor::receive(Operator operation)
 
 void CpuAndreVictor::receive(Control control)
 {
+    if (this->getIsDoubleMemory() && control != MEMORY_READ_CLEAR)
+        this->setIsDoubleMemory(false);
     switch (control)
     {
     case DECIMAL_SEPARATOR:
@@ -466,11 +462,14 @@ void CpuAndreVictor::showResponseOnDisplay(string value)
     }
 }
 
-float CpuAndreVictor::getCurrentValue(){
-    if(this->writeIndex == 0){
+float CpuAndreVictor::getCurrentValue()
+{
+    if (this->writeIndex == 0)
+    {
         return this->registerOne->getValue();
     }
-    else {
+    else
+    {
         return this->registerTwo->getValue();
     }
 }
@@ -491,20 +490,20 @@ void CpuAndreVictor::mMinus()
 
 void CpuAndreVictor::mrc()
 {
-    if (!this->memoryRegister->getIsDoublePress())
+    if (this->getIsDoubleMemory())
+    {
+        this->memoryRegister->reset();
+    }
+    else
     {
         float response = this->memoryRegister->getValue();
         stringstream stream;
         stream << response;
         string convertedValue = stream.str();
         this->showResponseOnDisplay(convertedValue);
-        this->memoryRegister->setIsDoublePress(true);
-    }
-    else{
-        this->memoryRegister->reset();
+        this->setIsDoubleMemory(true);
     }
 }
-
 
 bool CpuAndreVictor::isOn()
 {
@@ -514,4 +513,14 @@ bool CpuAndreVictor::isOn()
 void CpuAndreVictor::setOn(bool value)
 {
     this->on = value;
+}
+
+void CpuAndreVictor::setIsDoubleMemory(bool value)
+{
+    this->isDoubleMemory = value;
+}
+
+bool CpuAndreVictor::getIsDoubleMemory()
+{
+    return this->isDoubleMemory;
 }
