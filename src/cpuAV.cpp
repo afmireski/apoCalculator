@@ -222,6 +222,24 @@ void CpuAndreVictor::receive(Digit digit)
     }
 }
 
+float CpuAndreVictor::calculatePercentage(Operator operation, float value, float per)
+{
+    switch (operation)
+    {
+    case SUM:
+        return value + (value * per);
+    case SUBTRACTION:
+        return value - (value * per);
+    case MULTIPLICATION:
+        return value * per;
+    case DIVISION:
+        return value / per;
+    default:
+        throw new CalculatorErrorAndreVictor("This operation does not work with percentage!!!");
+        break;
+    }
+}
+
 void CpuAndreVictor::calculate(Operator operation)
 {
     float valueOne = this->registerOne->getValue();
@@ -243,7 +261,16 @@ void CpuAndreVictor::calculate(Operator operation)
         response = valueOne / valueTwo;
         break;
     case SQUARE_ROOT:
-        float value = this->writeIndex == 0 ? valueOne : valueTwo;
+    {
+        float value;
+        if (this->writeIndex == 0)
+        {
+            value = valueOne;
+        }
+        else
+        {
+            value = valueTwo;
+        }
 
         if (value < 0)
         {
@@ -251,27 +278,14 @@ void CpuAndreVictor::calculate(Operator operation)
         }
         response = sqrtf(value);
         break;
+    }
     case PERCENTAGE:
+    {
         float percentage = valueTwo / 100;
-        switch (this->operation)
-        {
-        case SUM:
-            response = valueOne + (valueOne * percentage);
-            break;
-        case SUBTRACTION:
-            response = valueOne - (valueOne * percentage);
-            break;
-        case MULTIPLICATION:
-            response = valueOne * percentage;
-            break;
-        case DIVISION:
-            response = valueOne / percentage;
-            break;
-        default:
-            throw new CalculatorErrorAndreVictor("This operation does not work with percentage!!!");
-            break;
-        }
+
+        response = calculatePercentage(this->operation, valueOne, percentage);
         break;
+    }
     default:
         throw new CalculatorErrorAndreVictor("Operator not implemented!!!");
         break;

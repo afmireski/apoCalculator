@@ -82,6 +82,8 @@ class CpuAndreVictor : public Cpu
 
     void calculate(Operator);
 
+    float calculatePercentage(Operator, float, float);
+
     bool isOn();
 
     void setOn(bool = true);

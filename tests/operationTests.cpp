@@ -123,6 +123,77 @@ void radTest(CpuAndreVictor* cpu) {
     cout << "--- Teste Raiz ---\n";
 }
 
+void percentageTest(CpuAndreVictor* cpu) {
+    cout << "--- Teste Porcentagem ---\n";
+    cout << "100 + 10% = 110\n";
+    cpu->receive(ON_CLEAR_ERROR);
+
+    cpu->receive(ONE);
+    cpu->receive(ZERO);
+    cpu->receive(ZERO);
+
+    cpu->receive(SUM);
+
+    cpu->receive(ONE);
+    cpu->receive(ZERO);
+
+    cpu->receive(PERCENTAGE);
+
+    cpu->receive(OFF);
+
+    cout << "100 - 10% = 90\n";
+
+    cpu->receive(ON_CLEAR_ERROR);
+
+    cpu->receive(ONE);
+    cpu->receive(ZERO);
+    cpu->receive(ZERO);
+
+    cpu->receive(SUBTRACTION);
+
+    cpu->receive(ONE);
+    cpu->receive(ZERO);
+
+    cpu->receive(PERCENTAGE);
+
+    cpu->receive(OFF);
+
+    cout << "100 * 10% = 10\n";
+
+    cpu->receive(ON_CLEAR_ERROR);
+
+    cpu->receive(ONE);
+    cpu->receive(ZERO);
+    cpu->receive(ZERO);
+
+    cpu->receive(MULTIPLICATION);
+
+    cpu->receive(ONE);
+    cpu->receive(ZERO);
+
+    cpu->receive(PERCENTAGE);
+
+    cpu->receive(OFF);
+
+    cout << "100 / 10% = 1000\n";
+
+    cpu->receive(ON_CLEAR_ERROR);
+
+    cpu->receive(ONE);
+    cpu->receive(ZERO);
+    cpu->receive(ZERO);
+
+    cpu->receive(DIVISION);
+
+    cpu->receive(ONE);
+    cpu->receive(ZERO);
+
+    cpu->receive(PERCENTAGE);
+
+    cpu->receive(OFF);
+    cout << "--- Teste Porcentagem ---\n";
+}
+
 int main()
 {
     CpuAndreVictor *cpu = new CpuAndreVictor();
@@ -135,6 +206,7 @@ int main()
     mltTest(cpu);
     divTest(cpu);
     radTest(cpu);
+    percentageTest(cpu);
 
     delete cpu;
     delete display;
