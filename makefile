@@ -1,4 +1,5 @@
 calculator:
+	g++ -c src/calculatorErrorAV.cpp -o calculatorErrorAV.o -g
 	g++ -c src/keyAV.cpp -o keyAV.o -g
 	g++ -c src/keyboardAV.cpp -o keyboardAV.o -g
 	g++ -c src/cpuAV.cpp -o cpuAV.o -g
@@ -7,6 +8,7 @@ calculator:
 	g++ src/main.cpp *.o -o ./bin/main -g
 
 test:
+	g++ -c src/calculatorErrorAV.cpp -o calculatorErrorAV.o -g
 	g++ -c src/keyAV.cpp -o keyAV.o -g
 	g++ -c src/keyboardAV.cpp -o keyboardAV.o -g
 	g++ -c src/cpuAV.cpp -o cpuAV.o -g
