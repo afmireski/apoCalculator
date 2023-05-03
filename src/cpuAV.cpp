@@ -419,9 +419,9 @@ float CpuAndreVictor::getCurrentValue(){
     if(this->writeIndex == 0){
         return this->registerOne->getValue();
     }
-    else(
+    else {
         return this->registerTwo->getValue();
-    )
+    }
 }
 
 void CpuAndreVictor::mPlus()

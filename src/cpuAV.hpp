@@ -85,7 +85,7 @@ class CpuAndreVictor : public Cpu
 
     void showResponseOnDisplay(string);
 
-    void getCurrentValue();
+    float getCurrentValue();
 
     void mPlus();
 
