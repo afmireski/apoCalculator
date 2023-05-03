@@ -1,4 +1,5 @@
 # ADD
+    #21 - Implementar operações do registrador de memória; 
     #23 - Substituir `interfaces.hpp`
     #17 - Implement `cpu.cpp`
     #11 - Implement `key.cpp`
