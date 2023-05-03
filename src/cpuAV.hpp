@@ -87,11 +87,11 @@ class CpuAndreVictor : public Cpu
 
     void getCurrentValue()
 
-    void MPlus();
+    void mPlus();
 
-    void MMinus();
+    void mMinus();
 
-    void MRC();
+    void mrc();
 
     void calculate(Operator);
 
