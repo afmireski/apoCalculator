@@ -121,6 +121,15 @@ Signal Register::getSignal()
     return this->signal;
 }
 
+bool Register::getIsDoublePress(){
+    return this->isDoublePress;
+}
+
+void Register::setIsDoublePress(bool value)
+{
+    this->isDoublePress = value;
+}
+
 void Register::setSignal(Signal value = NEGATIVE)
 {
     this->signal = value;
@@ -133,6 +142,7 @@ void Register::reset()
     this->hasSeparator = false;
     this->signal = POSITIVE;
     this->bitLen = 1;
+    this->isDoublePress = false;
 }
 
 void Register::countBits()
@@ -383,6 +393,14 @@ void CpuAndreVictor::receive(Control control)
             }
         }
         break;
+    case MEMORY_READ_CLEAR:
+        this->mrc();
+        break;
+    case MEMORY_SUM:
+        this->mPlus();
+    case MEMORY_SUBTRACTION:
+        this->mMinus();
+        break;
     default:
         throw new CalculatorErrorAndreVictor("Control not implemented.!!!");
         break;
@@ -447,6 +465,46 @@ void CpuAndreVictor::showResponseOnDisplay(string value)
         this->display->clear();
     }
 }
+
+float CpuAndreVictor::getCurrentValue(){
+    if(this->writeIndex == 0){
+        return this->registerOne->getValue();
+    }
+    else {
+        return this->registerTwo->getValue();
+    }
+}
+
+void CpuAndreVictor::mPlus()
+{
+    float value = getCurrentValue();
+    float memoryValue = this->memoryRegister->getValue();
+    this->memoryRegister->setValue(to_string(value + memoryValue));
+}
+
+void CpuAndreVictor::mMinus()
+{
+    float value = getCurrentValue();
+    float memoryValue = this->memoryRegister->getValue();
+    this->memoryRegister->setValue(to_string(memoryValue - value));
+}
+
+void CpuAndreVictor::mrc()
+{
+    if (!this->memoryRegister->getIsDoublePress())
+    {
+        float response = this->memoryRegister->getValue();
+        stringstream stream;
+        stream << response;
+        string convertedValue = stream.str();
+        this->showResponseOnDisplay(convertedValue);
+        this->memoryRegister->setIsDoublePress(true);
+    }
+    else{
+        this->memoryRegister->reset();
+    }
+}
+
 
 bool CpuAndreVictor::isOn()
 {

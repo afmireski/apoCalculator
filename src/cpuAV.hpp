@@ -34,6 +34,7 @@ class Register : public RegisterInterface
     float decimalValue;
     bool hasSeparator;
     Signal signal;
+    bool isDoublePress;
 
     unsigned char bitLen;
 
@@ -53,6 +54,10 @@ public:
     void setValue(string);
 
     float getValue();
+
+    bool getIsDoublePress();
+
+    void setIsDoublePress(bool);
 
     void setDecimalSeparator(bool);
 
@@ -79,6 +84,14 @@ class CpuAndreVictor : public Cpu
     int convertDigitToInt(Digit);
 
     void showResponseOnDisplay(string);
+
+    float getCurrentValue();
+
+    void mPlus();
+
+    void mMinus();
+
+    void mrc();
 
     void calculate(Operator);
 
