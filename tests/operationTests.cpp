@@ -196,8 +196,11 @@ void percentageTest(CpuAndreVictor* cpu) {
 
 int main()
 {
+    CalculatorAndreVictor *calculator = new CalculatorAndreVictor();
     CpuAndreVictor *cpu = new CpuAndreVictor();
     DisplayAndreVictor* display = new DisplayAndreVictor();
+    KeyboardAndreVictor* keyboard = new KeyboardAndreVictor();
+    KeyDigit *key0 = new KeyDigitAndreVictor();
 
     cpu->setDisplay(display);
 

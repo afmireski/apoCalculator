@@ -1,25 +1,6 @@
 #include "keyAV.hpp"
 #include <stddef.h>
 
-KeyAndreVictor::KeyAndreVictor(Symbol symbol)
-{
-    this->symbol = symbol;
-};
-
-KeyAndreVictor::~KeyAndreVictor(){};
-
-void KeyAndreVictor::press(){};
-
-Symbol KeyAndreVictor::getSymbol()
-{
-    return this->symbol;
-};
-
-void KeyAndreVictor::setKeyboard(Keyboard *keyboard)
-{
-    this->keyboard = keyboard;
-};
-
 KeyDigitAndreVictor::KeyDigitAndreVictor(Symbol symbol, Digit digit)
 {
     this->digit = digit;
@@ -38,7 +19,6 @@ void KeyDigitAndreVictor::press()
 
 Digit KeyDigitAndreVictor::getDigit()
 {
-
     return this->digit;
 }
 
@@ -57,7 +37,6 @@ KeyOperatorAndreVictor::~KeyOperatorAndreVictor(){};
 
 void KeyOperatorAndreVictor::press()
 {
-
     if (this->keyboard != NULL)
     {
         this->keyboard->receive(this->operation);

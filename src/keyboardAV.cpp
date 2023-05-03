@@ -1,12 +1,11 @@
+#include "calculatorErrorAV.hpp"
 #include "keyboardAV.hpp"
 #include "keyAV.hpp"
 
-KeyboardAndreVictor::KeyboardAndreVictor(Key **keys, Cpu *cpu)
+KeyboardAndreVictor::KeyboardAndreVictor()
 {
-
-    this->keys = keys;
-    this->cpu = cpu;
-}
+    this->keysCount = 0;
+};
 
 KeyboardAndreVictor::~KeyboardAndreVictor() {}
 
@@ -36,46 +35,42 @@ void KeyboardAndreVictor::receive(Control control)
 
 Key *KeyboardAndreVictor::getKey(Digit digit)
 {
-    for (int i = 0; i < sizeof(keys); i++)
-    {
-        KeyDigit *keyDigit = dynamic_cast<KeyDigit *>(keys[i]);
-        if (keyDigit && keyDigit->getDigit() == digit)
-        {
-            return keys[i];
-        }
-    }
-    return nullptr;
+    for (Key *key : this->keys)
+        if (dynamic_cast<KeyDigit *>(key) && ((KeyDigit *)key)->getDigit() == digit)
+            return key;
+    throw new CalculatorErrorAndreVictor("Key with this digit not found!");
 }
 
 Key *KeyboardAndreVictor::getKey(Operator operation)
 {
-    for (int i = 0; i < sizeof(keys); i++)
-    {
-        KeyOperator *keyOperator = dynamic_cast<KeyOperator *>(keys[i]);
-        if (keyOperator && keyOperator->getOperator() == operation)
-        {
-            return keys[i];
-        }
-    }
-    return nullptr;
+    for (Key *key : this->keys)
+        if (dynamic_cast<KeyOperator *>(key) && ((KeyOperator *)key)->getOperator() == operation)
+            return key;
+    throw new CalculatorErrorAndreVictor("Key with this operation not found!");
 }
 
 Key *KeyboardAndreVictor::getKey(Control control)
 {
-    for (int i = 0; i < sizeof(keys); i++)
-    {
-        KeyControlAndreVictor *keyControl = dynamic_cast<KeyControlAndreVictor *>(keys[i]);
-        if (keyControl && keyControl->getControl() == control)
-        {
-            return keys[i];
-        }
-    }
-    return nullptr;
+    for (Key *key : this->keys)
+        if (dynamic_cast<KeyControl *>(key) && ((KeyControl *)key)->getControl() == control)
+            return key;
+    throw new CalculatorErrorAndreVictor("Key with this control not found!");
 }
 
-void KeyboardAndreVictor::addKey(Key **key)
+Key *KeyboardAndreVictor::getKey(Symbol symbol) {
+  for (Key *key : this->keys)
+    if (key->getSymbol() == symbol)
+      return key;
+  throw new CalculatorErrorAndreVictor("Key with this symbol not found!");
+}
+
+void KeyboardAndreVictor::add(Key *key)
 {
-    this->keys = key;
+    if (key != nullptr)
+    {
+        this->keys.push_back(key);
+        key->setKeyboard(this);
+    }
 }
 
 // Define a CPU que receberá os comandos do teclado
