@@ -343,12 +343,12 @@ void CpuAndreVictor::receive(Control control)
         }
         break;
     case MEMORY_READ_CLEAR:
-        MRC();
+        this->mrc();
         break;
     case MEMORY_SUM:
-        MPlus();
+        this->mPlus();
     case MEMORY_SUBTRACTIONTRACTION:
-        MMinus();
+        this->mMinus();
         break;
     default:
         // Lançar exceção
