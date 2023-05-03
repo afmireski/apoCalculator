@@ -416,7 +416,7 @@ void CpuAndreVictor::showResponseOnDisplay(string value)
 }
 
 float CpuAndreVictor::getCurrentValue(){
-    if(this->writeIndex){
+    if(this->writeIndex == 0){
         return this->registerOne->getValue();
     }
     else(
