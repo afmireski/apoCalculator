@@ -43,7 +43,7 @@ enum Control
     OFF,
     MEMORY_READ_CLEAR,
     MEMORY_SUM,
-    MEMORY_SUBTRACTIONTRACTION
+    MEMORY_SUBTRACTION
 };
 
 typedef char const *Symbol;

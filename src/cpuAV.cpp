@@ -347,7 +347,7 @@ void CpuAndreVictor::receive(Control control)
         break;
     case MEMORY_SUM:
         this->mPlus();
-    case MEMORY_SUBTRACTIONTRACTION:
+    case MEMORY_SUBTRACTION:
         this->mMinus();
         break;
     default:
