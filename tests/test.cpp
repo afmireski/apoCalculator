@@ -383,7 +383,7 @@ int main()
         percentageTest(calc);
         memoryTest(calc);
     }
-    catch (CalculatorErrorAndreVictor *e)
+    catch (CalculatorError *e)
     {
         cout << e->getMessage() << "\n";
     }
