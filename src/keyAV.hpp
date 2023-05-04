@@ -2,80 +2,47 @@
 
 #include "calculator.hpp"
 
-class KeyAndreVictor : public Key
-{
-    Symbol symbol;
-
-    Keyboard *keyboard;
-
-public:
-    KeyAndreVictor(Symbol symbol);
-
-    ~KeyAndreVictor();
-
-    void press();
-
-    Symbol getSymbol();
-
-    void setKeyboard(Keyboard*);
-
-};
-
 class KeyDigitAndreVictor : public KeyDigit
 {
+    Symbol symbol;
     Digit digit;
-
-    Symbol symbol;
-
     Keyboard *keyboard;
 
 public:
-    KeyDigitAndreVictor(Symbol symbol, Digit digit);
+    KeyDigitAndreVictor(Symbol, Digit);
     ~KeyDigitAndreVictor();
-
     void press();
-
+    Symbol getSymbol();
+    void setKeyboard(Keyboard *);
     Digit getDigit();
-
-    void setKeyboard(Keyboard*);
-};
-
-class KeyOperatorAndreVictor : public KeyOperator
-{
-    Operator operation;
-
-    Symbol symbol;
-
-    Keyboard *keyboard;
-
-public:
-    KeyOperatorAndreVictor(Symbol symbol, Operator operation);
-
-    ~KeyOperatorAndreVictor();
-
-    void press();
-
-    Operator getOperator();
-
-    void setKeyboard(Keyboard*);
 };
 
 class KeyControlAndreVictor : public KeyControl
 {
-    Control control;
-
     Symbol symbol;
-
+    Control control;
     Keyboard *keyboard;
 
 public:
-    KeyControlAndreVictor(Symbol symbol, Control control);
-
+    KeyControlAndreVictor(Symbol, Control);
     ~KeyControlAndreVictor();
-
     void press();
-
+    Symbol getSymbol();
+    void setKeyboard(Keyboard *);
     Control getControl();
-    
-    void setKeyboard(Keyboard*);
+};
+
+class KeyOperatorAndreVictor : public KeyOperator
+{
+    Symbol symbol;
+    Operator operation;
+    Keyboard *keyboard;
+
+public:
+    KeyOperatorAndreVictor(Symbol, Operator);
+    ~KeyOperatorAndreVictor();
+    void press();
+    Symbol getSymbol();
+    void setKeyboard(Keyboard *);
+    Operator getOperator();
 };

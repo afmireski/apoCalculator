@@ -1,104 +1,95 @@
 #include "keyAV.hpp"
 #include <stddef.h>
 
-KeyAndreVictor::KeyAndreVictor(Symbol symbol)
+KeyDigitAndreVictor::KeyDigitAndreVictor(Symbol symbol, Digit digit)
 {
-    this->symbol = symbol;
-};
-
-KeyAndreVictor::~KeyAndreVictor(){};
-
-void KeyAndreVictor::press(){};
-
-Symbol KeyAndreVictor::getSymbol()
-{
-    return this->symbol;
-};
-
-void KeyAndreVictor::setKeyboard(Keyboard *keyboard)
-{
-    this->keyboard = keyboard;
-};
-
-KeyDigitAndreVictor::KeyDigitAndreVictor(Symbol symbol, Digit digit){
     this->digit = digit;
     this->symbol = symbol;
-
 };
 
 KeyDigitAndreVictor::~KeyDigitAndreVictor(){};
 
- void KeyDigitAndreVictor::press(){
+void KeyDigitAndreVictor::press()
+{
     if (this->keyboard != NULL)
     {
         this->keyboard->receive(this->digit);
     }
- }
+}
 
- Digit KeyDigitAndreVictor::getDigit(){
-
+Digit KeyDigitAndreVictor::getDigit()
+{
     return this->digit;
- }
+}
+
+Symbol KeyDigitAndreVictor::getSymbol()
+{
+    return this->symbol;
+}
 
 void KeyDigitAndreVictor::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };
 
-
-KeyOperatorAndreVictor::KeyOperatorAndreVictor(Symbol symbol, Operator operation){
+KeyOperatorAndreVictor::KeyOperatorAndreVictor(Symbol symbol, Operator operation)
+{
     this->operation = operation;
     this->symbol = symbol;
-
 };
 
 KeyOperatorAndreVictor::~KeyOperatorAndreVictor(){};
 
- void KeyOperatorAndreVictor::press(){
-
+void KeyOperatorAndreVictor::press()
+{
     if (this->keyboard != NULL)
     {
         this->keyboard->receive(this->operation);
     }
+}
 
- }
-
- Operator KeyOperatorAndreVictor::getOperator(){
-
+Operator KeyOperatorAndreVictor::getOperator()
+{
     return this->operation;
- }
-
+}
 
 void KeyOperatorAndreVictor::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };
 
-KeyControlAndreVictor::KeyControlAndreVictor(Symbol symbol, Control control){
+Symbol KeyOperatorAndreVictor::getSymbol()
+{
+    return this->symbol;
+}
+
+KeyControlAndreVictor::KeyControlAndreVictor(Symbol symbol, Control control)
+{
     this->control = control;
     this->symbol = symbol;
-
 };
 
 KeyControlAndreVictor::~KeyControlAndreVictor(){};
 
- void KeyControlAndreVictor::press(){
-
+void KeyControlAndreVictor::press()
+{
     if (this->keyboard != NULL)
     {
         this->keyboard->receive(this->control);
     }
+}
 
- }
-
- Control KeyControlAndreVictor::getControl(){
-
+Control KeyControlAndreVictor::getControl()
+{
     return this->control;
- }
-
+}
 
 void KeyControlAndreVictor::setKeyboard(Keyboard *keyboard)
 {
     this->keyboard = keyboard;
 };
 
+Symbol KeyControlAndreVictor::getSymbol()
+{
+    return this->symbol;
+}

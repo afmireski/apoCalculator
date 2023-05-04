@@ -1,4 +1,5 @@
 #include "cpuAV.hpp"
+#include "calculatorErrorAV.hpp"
 #include <cstdlib>
 #include <cmath>
 #include <sstream>
@@ -15,17 +16,20 @@ Register::~Register() {}
 
 void Register::updateValue(int value)
 {
-    if (this->hasDecimalSeparator())
+    if (this->bitLen < 8)
     {
-        this->decimalValue = (this->decimalValue * 10.0) + value;
+        if (this->hasDecimalSeparator())
+        {
+            this->decimalValue = (this->decimalValue * 10.0) + value;
+        }
+        else
+        {
+            this->intValue = (this->intValue * 10.0) + value;
+        }
+        if (this->bitLen == 1 && this->intValue == 0 && this->decimalValue == 0)
+            return;
+        this->bitLen++;
     }
-    else
-    {
-        this->intValue = (this->intValue * 10.0) + value;
-    }
-    if (this->bitLen == 1 && this->intValue == 0 && this->decimalValue == 0)
-        return;
-    this->bitLen++;
 }
 
 float Register::getIntValue()
@@ -45,6 +49,7 @@ float Register::getDecimalValue()
 
 void Register::setValue(string value)
 {
+    this->reset();
     for (int i = 0; value[i] != '\0'; i++)
     {
         switch (value[i])
@@ -85,6 +90,8 @@ void Register::setValue(string value)
         case '9':
             this->updateValue(9);
             break;
+        default:
+            throw new CalculatorErrorAndreVictor("This symbol cannot be converted!!!");
         }
     }
 }
@@ -115,15 +122,6 @@ Signal Register::getSignal()
     return this->signal;
 }
 
-bool Register::getIsDoublePress(){
-    return this->isDoublePress;
-}
-
-void Register::setIsDoublePress(bool value)
-{
-    this->isDoublePress = value;
-}
-
 void Register::setSignal(Signal value = NEGATIVE)
 {
     this->signal = value;
@@ -136,7 +134,6 @@ void Register::reset()
     this->hasSeparator = false;
     this->signal = POSITIVE;
     this->bitLen = 1;
-    this->isDoublePress = false;
 }
 
 void Register::countBits()
@@ -165,6 +162,7 @@ CpuAndreVictor::CpuAndreVictor()
     this->operation = SUM;
     this->writeIndex = 0;
     this->on = false;
+    this->isDoubleMemory = false;
 
     this->display = NULL;
 }
@@ -202,7 +200,7 @@ int CpuAndreVictor::convertDigitToInt(Digit value)
     case NINE:
         return 9;
     default:
-        return -1;
+        throw new CalculatorErrorAndreVictor("DIGIT not implemented!!!");
     }
 }
 
@@ -210,6 +208,8 @@ void CpuAndreVictor::receive(Digit digit)
 {
     if (this->isOn())
     {
+        if (this->getIsDoubleMemory())
+            this->setIsDoubleMemory(false);
         if (this->display != NULL)
             this->display->add(digit);
 
@@ -226,7 +226,26 @@ void CpuAndreVictor::receive(Digit digit)
     }
 }
 
-void CpuAndreVictor::calculate(Operator operation)
+float CpuAndreVictor::calculatePercentage(Operator operation, float value, float per)
+{
+    switch (operation)
+    {
+    case SUM:
+        return value + (value * per);
+    case SUBTRACTION:
+        return value - (value * per);
+    case MULTIPLICATION:
+        return value * per;
+    case DIVISION:
+        if (per == 0) return 0;
+        return value / per;
+    default:
+        throw new CalculatorErrorAndreVictor("This operation does not work with percentage!!!");
+        break;
+    }
+}
+
+float CpuAndreVictor::calculate(Operator operation)
 {
     float valueOne = this->registerOne->getValue();
     float valueTwo = this->registerTwo->getValue();
@@ -244,17 +263,40 @@ void CpuAndreVictor::calculate(Operator operation)
         response = valueOne * valueTwo;
         break;
     case DIVISION:
+        if (valueTwo == 0) throw new CalculatorErrorAndreVictor("Does exists division by zero!!!");
+
         response = valueOne / valueTwo;
         break;
     case SQUARE_ROOT:
-        // Exceção se for negativo
-        response = sqrtf(this->writeIndex == 0 ? valueOne : valueTwo);
-        break;
-    default:
-        // throw error
+    {
+        float value;
+        if (this->writeIndex == 0)
+        {
+            value = valueOne;
+        }
+        else
+        {
+            value = valueTwo;
+        }
+
+        if (value < 0)
+        {
+            throw new CalculatorErrorAndreVictor("Negative numbers do not have a square root.!!!");
+        }
+        response = sqrtf(value);
         break;
     }
-    registerOne->reset();
+    case PERCENTAGE:
+    {
+        float percentage = valueTwo / 100;
+
+        response = calculatePercentage(this->operation, valueOne, percentage);
+        break;
+    }
+    default:
+        throw new CalculatorErrorAndreVictor("Operator not implemented!!!");
+        break;
+    }
     registerTwo->reset();
     this->writeIndex = 1;
 
@@ -264,13 +306,22 @@ void CpuAndreVictor::calculate(Operator operation)
 
     registerOne->setValue(convertValue);
     this->showResponseOnDisplay(convertValue);
+
+    return response;
 }
 
 void CpuAndreVictor::receive(Operator operation)
 {
     if (this->isOn())
     {
+        if (this->getIsDoubleMemory())
+            this->setIsDoubleMemory(false);
         if (operation == SQUARE_ROOT)
+        {
+            this->calculate(operation);
+            this->operation = SUM;
+        }
+        else if (operation == PERCENTAGE)
         {
             this->calculate(operation);
             this->operation = SUM;
@@ -285,21 +336,24 @@ void CpuAndreVictor::receive(Operator operation)
 
 void CpuAndreVictor::receive(Control control)
 {
+    if (this->getIsDoubleMemory() && control != MEMORY_READ_CLEAR)
+        this->setIsDoubleMemory(false);
     switch (control)
     {
     case DECIMAL_SEPARATOR:
         if (!this->isOn())
             break;
 
-        if (writeIndex == 0)
+        if (writeIndex == 0 && !registerOne->hasDecimalSeparator())
         {
             registerOne->setDecimalSeparator(true);
+            this->display->addDecimalSeparator();
         }
-        else
+        else if (writeIndex == 1 && !registerTwo->hasDecimalSeparator())
         {
             registerTwo->setDecimalSeparator(true);
+            this->display->addDecimalSeparator();
         }
-        this->display->addDecimalSeparator();
         break;
     case OFF:
         if (!this->isOn())
@@ -347,11 +401,12 @@ void CpuAndreVictor::receive(Control control)
         break;
     case MEMORY_SUM:
         this->mPlus();
+        break;
     case MEMORY_SUBTRACTION:
         this->mMinus();
         break;
     default:
-        // Lançar exceção
+        throw new CalculatorErrorAndreVictor("Control not implemented.!!!");
         break;
     }
 }
@@ -407,7 +462,7 @@ void CpuAndreVictor::showResponseOnDisplay(string value)
                 this->display->setSignal(NEGATIVE);
                 break;
             default:
-                // Lançar uma exceção
+                throw new CalculatorErrorAndreVictor("This symbol cannot be showed!!!");
                 break;
             }
         }
@@ -415,45 +470,47 @@ void CpuAndreVictor::showResponseOnDisplay(string value)
     }
 }
 
-float CpuAndreVictor::getCurrentValue(){
-    if(this->writeIndex == 0){
-        return this->registerOne->getValue();
-    }
-    else {
-        return this->registerTwo->getValue();
-    }
-}
-
 void CpuAndreVictor::mPlus()
 {
-    float value = getCurrentValue();
+    float value = calculate(this->operation);
     float memoryValue = this->memoryRegister->getValue();
-    this->memoryRegister->setValue(to_string(value + memoryValue));
+    this->memoryRegister->setValue(to_string(memoryValue + value));
 }
 
 void CpuAndreVictor::mMinus()
 {
-    float value = getCurrentValue();
+    float value = calculate(this->operation);
     float memoryValue = this->memoryRegister->getValue();
     this->memoryRegister->setValue(to_string(memoryValue - value));
 }
 
 void CpuAndreVictor::mrc()
 {
-    if (!this->memoryRegister->getIsDoublePress())
+    if (this->getIsDoubleMemory())
+    {
+        this->memoryRegister->reset();
+        this->setIsDoubleMemory(false);
+    }
+    else
     {
         float response = this->memoryRegister->getValue();
         stringstream stream;
         stream << response;
         string convertedValue = stream.str();
         this->showResponseOnDisplay(convertedValue);
-        this->memoryRegister->setIsDoublePress(true);
-    }
-    else{
-        this->memoryRegister->reset();
+        if (this->writeIndex == 0)
+        {
+            this->registerOne->setValue(convertedValue);
+            this->writeIndex = 1;
+        }
+        else
+        {
+            this->registerTwo->setValue(convertedValue);
+            this->writeIndex = 0;
+        }
+        this->setIsDoubleMemory(true);
     }
 }
-
 
 bool CpuAndreVictor::isOn()
 {
@@ -463,4 +520,14 @@ bool CpuAndreVictor::isOn()
 void CpuAndreVictor::setOn(bool value)
 {
     this->on = value;
+}
+
+void CpuAndreVictor::setIsDoubleMemory(bool value)
+{
+    this->isDoubleMemory = value;
+}
+
+bool CpuAndreVictor::getIsDoubleMemory()
+{
+    return this->isDoubleMemory;
 }

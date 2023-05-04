@@ -34,7 +34,6 @@ class Register : public RegisterInterface
     float decimalValue;
     bool hasSeparator;
     Signal signal;
-    bool isDoublePress;
 
     unsigned char bitLen;
 
@@ -54,10 +53,6 @@ public:
     void setValue(string);
 
     float getValue();
-
-    bool getIsDoublePress();
-
-    void setIsDoublePress(bool);
 
     void setDecimalSeparator(bool);
 
@@ -79,13 +74,13 @@ class CpuAndreVictor : public Cpu
     unsigned char writeIndex;
     bool on;
 
+    bool isDoubleMemory;
+
     Display *display;
 
     int convertDigitToInt(Digit);
 
     void showResponseOnDisplay(string);
-
-    float getCurrentValue();
 
     void mPlus();
 
@@ -93,7 +88,13 @@ class CpuAndreVictor : public Cpu
 
     void mrc();
 
-    void calculate(Operator);
+    void setIsDoubleMemory(bool);
+
+    bool getIsDoubleMemory();
+
+    float calculate(Operator);
+
+    float calculatePercentage(Operator, float, float);
 
     bool isOn();
 
