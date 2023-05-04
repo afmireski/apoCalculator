@@ -82,8 +82,6 @@ class CpuAndreVictor : public Cpu
 
     void showResponseOnDisplay(string);
 
-    float getCurrentValue();
-
     void mPlus();
 
     void mMinus();
@@ -94,7 +92,7 @@ class CpuAndreVictor : public Cpu
 
     bool getIsDoubleMemory();
 
-    void calculate(Operator);
+    float calculate(Operator);
 
     float calculatePercentage(Operator, float, float);
 

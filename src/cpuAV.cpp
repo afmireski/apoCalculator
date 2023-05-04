@@ -49,6 +49,7 @@ float Register::getDecimalValue()
 
 void Register::setValue(string value)
 {
+    this->reset();
     for (int i = 0; value[i] != '\0'; i++)
     {
         switch (value[i])
@@ -161,6 +162,7 @@ CpuAndreVictor::CpuAndreVictor()
     this->operation = SUM;
     this->writeIndex = 0;
     this->on = false;
+    this->isDoubleMemory = false;
 
     this->display = NULL;
 }
@@ -242,7 +244,7 @@ float CpuAndreVictor::calculatePercentage(Operator operation, float value, float
     }
 }
 
-void CpuAndreVictor::calculate(Operator operation)
+float CpuAndreVictor::calculate(Operator operation)
 {
     float valueOne = this->registerOne->getValue();
     float valueTwo = this->registerTwo->getValue();
@@ -292,7 +294,6 @@ void CpuAndreVictor::calculate(Operator operation)
         throw new CalculatorErrorAndreVictor("Operator not implemented!!!");
         break;
     }
-    registerOne->reset();
     registerTwo->reset();
     this->writeIndex = 1;
 
@@ -302,6 +303,8 @@ void CpuAndreVictor::calculate(Operator operation)
 
     registerOne->setValue(convertValue);
     this->showResponseOnDisplay(convertValue);
+
+    return response;
 }
 
 void CpuAndreVictor::receive(Operator operation)
@@ -394,6 +397,7 @@ void CpuAndreVictor::receive(Control control)
         break;
     case MEMORY_SUM:
         this->mPlus();
+        break;
     case MEMORY_SUBTRACTION:
         this->mMinus();
         break;
@@ -462,28 +466,16 @@ void CpuAndreVictor::showResponseOnDisplay(string value)
     }
 }
 
-float CpuAndreVictor::getCurrentValue()
-{
-    if (this->writeIndex == 0)
-    {
-        return this->registerOne->getValue();
-    }
-    else
-    {
-        return this->registerTwo->getValue();
-    }
-}
-
 void CpuAndreVictor::mPlus()
 {
-    float value = getCurrentValue();
+    float value = calculate(this->operation);
     float memoryValue = this->memoryRegister->getValue();
-    this->memoryRegister->setValue(to_string(value + memoryValue));
+    this->memoryRegister->setValue(to_string(memoryValue + value));
 }
 
 void CpuAndreVictor::mMinus()
 {
-    float value = getCurrentValue();
+    float value = calculate(this->operation);
     float memoryValue = this->memoryRegister->getValue();
     this->memoryRegister->setValue(to_string(memoryValue - value));
 }
@@ -493,6 +485,7 @@ void CpuAndreVictor::mrc()
     if (this->getIsDoubleMemory())
     {
         this->memoryRegister->reset();
+        this->setIsDoubleMemory(false);
     }
     else
     {
@@ -501,6 +494,13 @@ void CpuAndreVictor::mrc()
         stream << response;
         string convertedValue = stream.str();
         this->showResponseOnDisplay(convertedValue);
+        if (this->writeIndex == 0) {
+            this->registerOne->setValue(convertedValue);
+            this->writeIndex = 1;
+        } else {
+            this->registerTwo->setValue(convertedValue);
+            this->writeIndex = 0;
+        }
         this->setIsDoubleMemory(true);
     }
 }

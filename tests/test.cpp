@@ -247,6 +247,48 @@ void percentageTest(CalculatorAndreVictor *calc)
     }
 }
 
+void memoryTest(CalculatorAndreVictor *calc)
+{
+    try
+    {
+        cout << "--- Teste Memory ---\n";
+        cout << "5 + 4 M+\n";
+        cout << "M=9\n";
+        cout << "9 - 10 = -1\n";
+        cout << "M- -> 9 - -1 -> M = 10\n";
+        cout << "MRC -> 10\n";
+        cout << "MRC -> CLEAR\n";
+        cout << "MRC -> 0\n";
+        calc->getKeyboard()->getKey("ON/CE")->press();
+
+        calc->getKeyboard()->getKey("5")->press();
+        calc->getKeyboard()->getKey("+")->press();
+        calc->getKeyboard()->getKey("4")->press();
+        // calc->getKeyboard()->getKey("=")->press();
+
+        calc->getKeyboard()->getKey("M+")->press();
+
+        calc->getKeyboard()->getKey("-")->press();
+        calc->getKeyboard()->getKey("1")->press();
+        calc->getKeyboard()->getKey("0")->press();
+
+        calc->getKeyboard()->getKey("=")->press();
+
+        calc->getKeyboard()->getKey("M-")->press();
+
+        calc->getKeyboard()->getKey("MRC")->press();
+        calc->getKeyboard()->getKey("MRC")->press();
+        calc->getKeyboard()->getKey("MRC")->press();
+
+        calc->getKeyboard()->getKey("OFF")->press();        
+        cout << "--- Teste Memory ---\n";
+    }
+    catch (CalculatorAndreVictor *e)
+    {
+        throw e;
+    }
+}
+
 CalculatorAndreVictor *buildCalculator()
 {
     CalculatorAndreVictor *calculator = new CalculatorAndreVictor();
@@ -329,6 +371,7 @@ int main()
         divTest(calc);
         radTest(calc);
         percentageTest(calc);
+        memoryTest(calc);
     }
     catch (CalculatorErrorAndreVictor *e)
     {
