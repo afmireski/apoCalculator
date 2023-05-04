@@ -12,9 +12,7 @@ cd apoCalculator
 # Execute o makefile para compilar o projeto
 make calculator
 
-# A partir desse momento o programa estará rodando.
-# Digite os números e operações que deseja realizar.
-# O programa para de executar quando a operação IGUAL for escolhida
+# Para rodar
 
 ```
 
