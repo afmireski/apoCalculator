@@ -15,6 +15,7 @@ test:
 	g++ -c src/displayAV.cpp -o display.o -g
 	g++ -c src/calculatorAV.cpp -o calculator.o -g
 	g++ tests/test.cpp *.o -o ./bin/test -g
+	./bin/test
 
 clean:
 	rm *.o
