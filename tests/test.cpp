@@ -58,7 +58,9 @@ void subTest(CalculatorAndreVictor *calc)
         calc->getKeyboard()->getKey("3")->press();
         calc->getKeyboard()->getKey(".")->press();
         calc->getKeyboard()->getKey("5")->press();
+        calc->getKeyboard()->getKey(".")->press();
         calc->getKeyboard()->getKey("6")->press();
+        calc->getKeyboard()->getKey(".")->press();
 
         calc->getKeyboard()->getKey("-")->press();
 
@@ -95,12 +97,17 @@ void mltTest(CalculatorAndreVictor *calc)
         calc->getKeyboard()->getKey(".")->press();
         calc->getKeyboard()->getKey("1")->press();
 
+        calc->getKeyboard()->getKey("=")->press();
+        calc->getKeyboard()->getKey("=")->press();
+        calc->getKeyboard()->getKey("=")->press();
+
         calc->getKeyboard()->getKey("*")->press();
 
         calc->getKeyboard()->getKey("2")->press();
         calc->getKeyboard()->getKey("2")->press();
         calc->getKeyboard()->getKey(".")->press();
         calc->getKeyboard()->getKey("7")->press();
+        calc->getKeyboard()->getKey(".")->press();
         calc->getKeyboard()->getKey("9")->press();
 
         calc->getKeyboard()->getKey("=")->press();
@@ -129,8 +136,12 @@ void divTest(CalculatorAndreVictor *calc)
         calc->getKeyboard()->getKey("4")->press();
         calc->getKeyboard()->getKey("2")->press();
         calc->getKeyboard()->getKey(".")->press();
+        calc->getKeyboard()->getKey(".")->press();
+        calc->getKeyboard()->getKey(".")->press();
         calc->getKeyboard()->getKey("4")->press();
 
+        calc->getKeyboard()->getKey("=")->press();
+        calc->getKeyboard()->getKey("=")->press();
         calc->getKeyboard()->getKey("=")->press();
         calc->getKeyboard()->getKey("OFF")->press();
         cout << "--- Teste Divisão ---\n";
@@ -375,7 +386,7 @@ int main()
     }
     catch (CalculatorErrorAndreVictor *e)
     {
-        cout << e->getMessage();
+        cout << e->getMessage() << "\n";
     }
     delete calc->getCpu();
     delete calc->getDisplay();

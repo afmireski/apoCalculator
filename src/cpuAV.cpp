@@ -262,6 +262,8 @@ float CpuAndreVictor::calculate(Operator operation)
         response = valueOne * valueTwo;
         break;
     case DIVISION:
+        if (valueTwo == 0) throw new CalculatorErrorAndreVictor("Does exists division by zero!!!");
+        
         response = valueOne / valueTwo;
         break;
     case SQUARE_ROOT:
@@ -341,15 +343,16 @@ void CpuAndreVictor::receive(Control control)
         if (!this->isOn())
             break;
 
-        if (writeIndex == 0)
+        if (writeIndex == 0 && !registerOne->hasDecimalSeparator())
         {
             registerOne->setDecimalSeparator(true);
+            this->display->addDecimalSeparator();
         }
-        else
+        else if (writeIndex == 1 && !registerTwo->hasDecimalSeparator())
         {
             registerTwo->setDecimalSeparator(true);
+            this->display->addDecimalSeparator();
         }
-        this->display->addDecimalSeparator();
         break;
     case OFF:
         if (!this->isOn())
@@ -494,10 +497,13 @@ void CpuAndreVictor::mrc()
         stream << response;
         string convertedValue = stream.str();
         this->showResponseOnDisplay(convertedValue);
-        if (this->writeIndex == 0) {
+        if (this->writeIndex == 0)
+        {
             this->registerOne->setValue(convertedValue);
             this->writeIndex = 1;
-        } else {
+        }
+        else
+        {
             this->registerTwo->setValue(convertedValue);
             this->writeIndex = 0;
         }
