@@ -39,7 +39,7 @@ void sumTest(Calculator *calc)
         calc->getKeyboard()->getKey("OFF")->press();
         cout << "--- Teste Soma ---\n";
     }
-    catch (CalculatorErrorAndreVictor *e)
+    catch (CalculatorError *e)
     {
         throw e;
     }
@@ -79,7 +79,7 @@ void subTest(Calculator *calc)
         calc->getKeyboard()->getKey("OFF")->press();
         cout << "--- Subtração ---\n";
     }
-    catch (CalculatorAndreVictor *e)
+    catch (CalculatorError *e)
     {
         throw e;
     }
@@ -115,7 +115,7 @@ void mltTest(Calculator *calc)
         calc->getKeyboard()->getKey("OFF")->press();
         cout << "--- Teste Multiplicação ---\n";
     }
-    catch (CalculatorAndreVictor *e)
+    catch (CalculatorError *e)
     {
         throw e;
     }
@@ -145,7 +145,7 @@ void divTest(Calculator *calc)
         calc->getKeyboard()->getKey("OFF")->press();
         cout << "--- Teste Divisão ---\n";
     }
-    catch (CalculatorAndreVictor *e)
+    catch (CalculatorError *e)
     {
         throw e;
     }
@@ -172,7 +172,7 @@ void radTest(Calculator *calc)
         calc->getKeyboard()->getKey("OFF")->press();
         cout << "--- Teste Raiz ---\n";
     }
-    catch (CalculatorAndreVictor *e)
+    catch (CalculatorError *e)
     {
         throw e;
     }
@@ -251,7 +251,7 @@ void percentageTest(Calculator *calc)
         calc->getKeyboard()->getKey("OFF")->press();
         cout << "--- Teste Porcentagem ---\n";
     }
-    catch (CalculatorAndreVictor *e)
+    catch (CalculatorError *e)
     {
         throw e;
     }
@@ -293,7 +293,7 @@ void memoryTest(Calculator *calc)
         calc->getKeyboard()->getKey("OFF")->press();        
         cout << "--- Teste Memory ---\n";
     }
-    catch (CalculatorAndreVictor *e)
+    catch (CalculatorError *e)
     {
         throw e;
     }
