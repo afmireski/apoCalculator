@@ -237,6 +237,7 @@ float CpuAndreVictor::calculatePercentage(Operator operation, float value, float
     case MULTIPLICATION:
         return value * per;
     case DIVISION:
+        if (per == 0) return 0;
         return value / per;
     default:
         throw new CalculatorErrorAndreVictor("This operation does not work with percentage!!!");
@@ -263,7 +264,7 @@ float CpuAndreVictor::calculate(Operator operation)
         break;
     case DIVISION:
         if (valueTwo == 0) throw new CalculatorErrorAndreVictor("Does exists division by zero!!!");
-        
+
         response = valueOne / valueTwo;
         break;
     case SQUARE_ROOT:

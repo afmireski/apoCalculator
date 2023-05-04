@@ -141,8 +141,6 @@ void divTest(CalculatorAndreVictor *calc)
         calc->getKeyboard()->getKey("4")->press();
 
         calc->getKeyboard()->getKey("=")->press();
-        calc->getKeyboard()->getKey("=")->press();
-        calc->getKeyboard()->getKey("=")->press();
         calc->getKeyboard()->getKey("OFF")->press();
         cout << "--- Teste Divisão ---\n";
     }
