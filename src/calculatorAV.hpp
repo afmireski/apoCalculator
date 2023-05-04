@@ -1,6 +1,6 @@
 #include "calculator.hpp"
 
-class CalculatorAndreVictor : Calculator
+class CalculatorAndreVictor : public Calculator
 {
     Display *display;
 

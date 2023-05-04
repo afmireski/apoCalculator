@@ -1,8 +1,8 @@
 #include "calculatorAV.hpp"
 
-CalculatorAndreVictor::CalculatorAndreVictor(){};
+CalculatorAndreVictor::CalculatorAndreVictor() {};
 
-CalculatorAndreVictor::~CalculatorAndreVictor(){};
+CalculatorAndreVictor::~CalculatorAndreVictor() {};
 
 Display *CalculatorAndreVictor::getDisplay()
 {

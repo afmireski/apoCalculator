@@ -4,11 +4,12 @@
 #include "../src/cpuAV.hpp"
 #include "../src/calculatorAV.hpp"
 #include "../src/calculatorErrorAV.hpp"
+#include "../src/calculator.hpp"
 #include "iostream"
 
 using namespace std;
 
-void sumTest(CalculatorAndreVictor *calc)
+void sumTest(Calculator *calc)
 {
     try
     {
@@ -44,7 +45,7 @@ void sumTest(CalculatorAndreVictor *calc)
     }
 }
 
-void subTest(CalculatorAndreVictor *calc)
+void subTest(Calculator *calc)
 {
     try
     {
@@ -84,7 +85,7 @@ void subTest(CalculatorAndreVictor *calc)
     }
 }
 
-void mltTest(CalculatorAndreVictor *calc)
+void mltTest(Calculator *calc)
 {
     try
     {
@@ -120,7 +121,7 @@ void mltTest(CalculatorAndreVictor *calc)
     }
 }
 
-void divTest(CalculatorAndreVictor *calc)
+void divTest(Calculator *calc)
 {
     try
     {
@@ -150,7 +151,7 @@ void divTest(CalculatorAndreVictor *calc)
     }
 }
 
-void radTest(CalculatorAndreVictor *calc)
+void radTest(Calculator *calc)
 {
     try
     {
@@ -177,7 +178,7 @@ void radTest(CalculatorAndreVictor *calc)
     }
 }
 
-void percentageTest(CalculatorAndreVictor *calc)
+void percentageTest(Calculator *calc)
 {
     try
     {
@@ -256,7 +257,7 @@ void percentageTest(CalculatorAndreVictor *calc)
     }
 }
 
-void memoryTest(CalculatorAndreVictor *calc)
+void memoryTest(Calculator *calc)
 {
     try
     {
@@ -298,12 +299,12 @@ void memoryTest(CalculatorAndreVictor *calc)
     }
 }
 
-CalculatorAndreVictor *buildCalculator()
+Calculator *buildCalculator()
 {
-    CalculatorAndreVictor *calculator = new CalculatorAndreVictor();
+    Calculator *calculator = new CalculatorAndreVictor();
     Cpu *cpu = new CpuAndreVictor();
-    DisplayAndreVictor *display = new DisplayAndreVictor();
-    KeyboardAndreVictor *keyboard = new KeyboardAndreVictor();
+    Display *display = new DisplayAndreVictor();
+    Keyboard *keyboard = new KeyboardAndreVictor();
 
     KeyDigit *key0 = new KeyDigitAndreVictor("0", ZERO);
     KeyDigit *key1 = new KeyDigitAndreVictor("1", ONE);
@@ -370,7 +371,7 @@ CalculatorAndreVictor *buildCalculator()
 int main()
 {
 
-    CalculatorAndreVictor *calc = buildCalculator();
+    Calculator *calc = buildCalculator();
 
     try
     {
